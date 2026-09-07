@@ -1311,8 +1311,17 @@ class TestTheTrustPagePublishesTheRate(unittest.TestCase):
         self.assertIn("2026-08-18", self.text)
 
     def test_the_ratified_answer_is_named(self) -> None:
-        self.assertIn("workshop", self.text)
-        self.assertIn("2026-08-18-workshop-paths-ratified.md", self.text)
+        """The page names the ratified answer and dates its ruling. It no
+        longer cites the decision record's filename: the published cut ships
+        no records, so a filename there is a citation every adopter finds
+        broken (the 2026-09-07 documentation pass removed the whole class).
+        What must survive is the substance — the workshop answer, its
+        ratification date, and the page saying plainly where the record
+        lives."""
+        flat = " ".join(self.text.split())
+        self.assertIn("workshop", flat)
+        self.assertIn("ratified 2026-08-18", flat)
+        self.assertIn("a published cut ships none", flat)
 
 
 if __name__ == "__main__":

@@ -143,8 +143,8 @@ on a tier — so 0 and 1 behave alike, as do 2 and 3, and the rest of the
 ladder is declared intent and practised discipline rather than enforced
 difference. That is not a gap between the law and the code: the law was
 amended to say so, ratified on 2026-08-26 and recorded in the policy's own
-Amendment log as version 1.1.0
-(`.keel/decisions/2026-08-26-the-ladder-is-one-threshold.md`). An adopter
+Amendment log as version 1.1.0 (the decision record stays with the
+maintainer's development records — a published cut ships none). An adopter
 choosing a tier deserves the mechanism, not the brochure.
 
 Most adopters should not start at 3. Start at 1 for the memory, move to 2
@@ -267,14 +267,14 @@ redacted first, before it returns anything to the model
 
 - **Claude Code only, for now.** keel's gates travel through this
   harness's own hook registration; governing a session on a different
-  harness waits on an adapter, which is planned and not yet built
-  (`.keel/decisions/2026-08-25-portability-goes-through-adapters.md`).
+  harness waits on an adapter, which is planned and not yet built (ruled
+  2026-08-25: portability goes through adapters).
 - **Proven on Windows; not yet watched end-to-end elsewhere.** The
   dashboard's one-click restart is written with no platform branching, but
   POSIX replaces the running process image where Windows starts a new one
   — a real difference no test exercises, because none of the suite execs
   for real. It has been watched work on Windows and not yet watched on
-  macOS or Linux (`.keel/backlog.md`, BL5).
+  macOS or Linux (an open entry in the maintainer's defect queue).
 - **The demo tour is entirely synthetic.** Every session id, task name and
   review verdict `scripts/keel_demo.py --tour` plays back is invented; it
   proves the mechanics work, not that any real work happened.

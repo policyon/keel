@@ -79,8 +79,7 @@ installed rather than quoted from this repository. A budget measured only over
 shipped templates says nothing about the session it is meant to protect.
 
 The limit is 1,400 estimated tokens. It was 1,200 from Phase 0 until
-2026-08-21, when
-`.keel/decisions/2026-08-21-the-always-loaded-ceiling-rises-to-1400.md` raised
+2026-08-21, when a ratified decision raised
 it — ratified by the owner, sized to a measurement (154 tokens of need for the
 compaction layer's two hook registrations, against 132 of headroom), and
 explicitly pre-approving no further raise. The number is never quoted from
@@ -271,8 +270,8 @@ exceeded.
 
 A limit may still be amended — it is configuration, not scripture — but the
 amendment lands in the constant and in a written decision together, never in
-prose alone: the 1,200 to 1,400 raise of 2026-08-21
-(`.keel/decisions/2026-08-21-the-always-loaded-ceiling-rises-to-1400.md`)
+prose alone: the 1,200 to 1,400 raise of 2026-08-21 (its decision record
+stays with the maintainer's development records)
 moved the constant, the rule text and the reason in one reviewed change.
 
 Enforced: `BUDGET_TOKEN_LIMIT` in `scripts/keel_checks.py`, applied by

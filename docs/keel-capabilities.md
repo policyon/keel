@@ -6,10 +6,11 @@ places a model would otherwise be trusted on its word. This page is the
 inventory — every capability the tree ships, and the tests that hold each one
 up.
 
-**Every number here was counted from the tree on 2026-08-26**, and each one
-says what counted it. A figure nobody can re-derive is the failure this page
-is most exposed to, so nothing below is quoted from memory or from an earlier
-document.
+**Every number here was counted from the tree, and each one carries its own
+count date and says what counted it** (the page began 2026-08-26; figures are
+re-measured when touched, never carried forward). A figure nobody can
+re-derive is the failure this page is most exposed to, so nothing below is
+quoted from memory or from an earlier document.
 
 ---
 
@@ -38,7 +39,7 @@ command line.
 | Redaction — the one place text becomes safe to record | `hooks/keel_redact.py` |
 | What this installation actually carries | `hooks/keel_features.py` |
 | The command line, ten subcommands | `scripts/keel.py` |
-| The ten repository checks | `scripts/keel_checks.py` |
+| The eleven repository checks | `scripts/keel_checks.py` |
 | Ledger-vs-log reconciliation, and the fix-round ladder (R44) | `scripts/keel_attest.py` |
 | Session-ledger contract checker | `scripts/keel_plans.py` |
 | Governance-field schema for records | `scripts/keel_records.py` |
@@ -66,8 +67,10 @@ dispatched wave's open questions into one numbered walkthrough).
 `log` distils a session's observations into records; `chart` retrieves them.
 `scripts/keel_index.py` maintains a derived index the records can always
 rebuild, and `scripts/keel_chart.py` reads it in two layers rather than
-loading the whole corpus. The corpus is 227 records today, 2026-09-06
-(`ls .keel/knowledge/` — `.keel/knowledge/`).
+loading the whole corpus. The maintainer's development corpus is 238 records
+today, 2026-09-07, counted by listing its `.keel/knowledge/` directory (a
+published cut ships that directory empty — the corpus is the development
+tree's, and every adopter grows their own).
 
 ### review — 5 reviewer agents
 
@@ -101,7 +104,8 @@ projects), `scripts/keel_demo.py` (a zero-token synthetic board),
 
 ## The enforcement surface
 
-**Ten repository checks** (nine → ten 2026-09-06, `--plugin` added for BL56),
+**Eleven repository checks** (nine → eleven across 2026-09-06: `--plugin`
+added for BL56, `--distribution` for the tracked install bundle),
 all in `scripts/keel_checks.py`, fail-closed — a check that cannot run is a
 failure, never a pass, with one declared exception: `--plugin` visibly SKIPS
 (not a pass) when the external `claude` binary is absent, since this
@@ -119,6 +123,7 @@ repository does not install it and CI's runners do not carry it:
 | `--policy` | a staged policy-file change that did not move its version (T230/T320) |
 | `--leak` | the shipped payload naming a home path, key or address (excluding declared record surfaces) |
 | `--plugin` | `claude plugin validate` reporting a component that fails to load, against a generated edition bundle (BL56) |
+| `--distribution` | a committed `dist/keel` bundle that drifted from what a fresh generation would write, or carries files one would not emit |
 
 Both scanning checks read **the tree the next commit can ship** — the index
 union the untracked-but-not-ignored files — so a file is checked while it is
@@ -140,11 +145,11 @@ hook-execution spike.
 
 ## Test coverage
 
-**2,982 tests across 85 modules** — counted on 2026-09-06 via
-`unittest.TestLoader().discover('tests')`, not from any previous figure.
-Alongside them sit **180 fixture files** under `tests/fixtures/`, in
-eight kinds: `gate` (108), `records` (18), `stop` (16), `agents` (12),
-`session` (10), `private` (8), `capture` (6), `knowledge` (2).
+**3,088 tests across 91 modules** — the count the gated suite wrapper
+(`scripts/keel_suite.py`) reported on 2026-09-07, not a carried-forward
+figure. Alongside them sit **195 fixture files** under `tests/fixtures/`, in
+eight kinds: `gate` (119), `records` (18), `stop` (18), `agents` (12),
+`session` (12), `private` (8), `capture` (6), `knowledge` (2).
 
 Fixtures ship **in both directions** by convention: a rule is proven by a
 case it must catch and a case it must not.
@@ -169,12 +174,13 @@ case it must catch and a case it must not.
 | 50 | `tests/test_keel_handoff_route.py` | the model and effort a delegation ran at |
 | 49 | `tests/test_keel_dashboard_t322.py` | task-chip attribution to the owning agent |
 
-The remaining 56 modules carry 1,410 tests between them, most of them named
-for the task that paid for them.
+The remaining 76 modules carry the rest between them, most of them named
+for the task that paid for them (the per-module counts above were taken
+2026-09-06 and rank the weight; the suite total above is newer).
 
 ### Coverage of the shipped modules
 
-**Every one of the 32 modules under `hooks/` and `scripts/` is named by at
+**Every one of the 35 modules under `hooks/` and `scripts/` is named by at
 least one test module** — verified by scanning the test tree for each module's
 name. The most heavily surrounded are `scripts/keel.py` (71 modules name it),
 `hooks/keel_events.py` (34) and `hooks/keel_gate.py` (23); the most thinly

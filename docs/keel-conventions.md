@@ -75,8 +75,8 @@ written; the identifiers in brackets are the rules it carries out, defined in
     recompiled from its source on every tool call, so a half-applied edit to
     `hooks/keel_gate.py`, `hooks/keel_stop.py`, `hooks/keel_hook.py` or any
     module they import does not fail later — it fails on the NEXT tool call,
-    and under
-    `.keel/decisions/2026-08-21-a-crash-is-a-deny-that-names-itself.md` an
+    and under the 2026-08-21 ruling that a crash is a deny that names itself,
+    an
     armed project then denies every write and every shell call, including the
     repair. So: fewest edits, each one complete in itself, and after every one
     an import check plus one live gated call before touching anything else. A
@@ -85,8 +85,8 @@ written; the identifiers in brackets are the rules it carries out, defined in
     git before the next attempt. Two pending half-edits are never acceptable.
 
     MEASURED, not advisory: three freezes on 2026-08-19, and one on 2026-08-21
-    written up from inside itself at
-    `.keel/plans/keel-freeze-2026-08-21-3fbfa431.md` — a single f-string split
+    written up from inside itself in the maintainer's own session records
+    — a single f-string split
     across two edits in an observer module froze a whole project's gates. Every
     executor brief that touches a gate cites this convention, and the
     launcher's own refusal sentence
@@ -99,8 +99,8 @@ written; the identifiers in brackets are the rules it carries out, defined in
     and nothing else in a green suite will tell you which of its tests are
     hollow.
 
-    Four properties, from
-    `.keel/decisions/2026-09-02-a-guard-is-proven-by-breaking-it.md`: the
+    Four properties, from the ratified 2026-09-02 ruling that a guard is
+    proven by breaking it: the
     mutation is applied to the REAL artefact rather than a copy; the restore
     sits in a `finally` and is verified, because a proof that can leave the tree
     broken is a hazard dressed as diligence; the observed failure MESSAGE is

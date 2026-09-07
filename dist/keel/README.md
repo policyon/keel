@@ -1,5 +1,7 @@
 # keel
 
+![The keel orchestration dashboard: a live session graph of the orchestrator, executors and reviewers, beside the plan ledger and the audit event feed](docs/keel-dashboard.png)
+
 keel is a governed agent harness: the structural spine under an AI coding
 session. It gates writes behind an approved plan and closes sessions with
 accounting that is verified against an append-only audit log rather than
@@ -20,8 +22,9 @@ a CI workflow runs every repository check and the full test suite on three
 operating systems — but CI is billing-blocked as of this writing, and its
 newest green three-OS evidence is dated 2026-09-02, not every push. keel is
 armed on its own repository at
-tier 2. There is still no published install path, so nothing is enforcing
-anything in your project.
+tier 2. The install path is the plugin marketplace (see
+[Install](#install)); installing enforces nothing until a project arms
+itself.
 
 ## See it first
 
@@ -49,12 +52,15 @@ at.
 - **Orchestration** — routing tiers, least-privilege executor and researcher agents, and the moor / ratify / refit skills: session close with accounting, standing decisions recorded the turn they are spoken, policy amendment by ratification.
 - **Knowledge layer** — mechanical capture, inline distillation, derived search index, budgeted injection.
 - **Review layer** — read-only specialist reviewers (correctness, silent failure, tests, security) under a structurally enforced house contract.
-- **Adoption layer** — environment study and doctor; `survey` and `doctor` ship.
+- **Adoption layer** — `survey` and `doctor` ship, and `/keel:lay` arms a
+  project non-destructively: it backs up what adoption can touch, deletes
+  nothing, and halts rather than proceed unbacked.
 
-**Not built yet**, listed so the shape is visible rather than implied: the rest
-of the adoption layer (non-destructive migration, drift detection), and the
-**workspace layer** (worktree-per-session isolation, port allocation) — both
-demand-gated, neither built.
+**Not built yet**, listed so the shape is visible rather than implied: an
+importer for legacy record formats and adopter-side drift detection (the
+rest of the adoption layer), and the **workspace layer**
+(worktree-per-session isolation, port allocation) — both demand-gated,
+neither built.
 
 ## Editions
 
@@ -132,18 +138,24 @@ it did not stop is the point, not an admission.
 
 ## Install
 
-**Not yet published.** There is no supported install path yet, and the single
-path when there is one will be the plugin marketplace: no runtime downloads,
-no `curl | bash`, no global binary.
+The single supported path is the plugin marketplace: no runtime downloads,
+no `curl | bash`, no global binary. In Claude Code:
 
-What a clone already carries, so the path is ready rather than promised: the
-marketplace entry names `dist/keel` as its plugin source, not the repository
-root. That bundle is committed, so a clone has the installable tree with no
-build step and no generator run — and an install from this manifest copies
-the bundle alone, never this repository's own session records, tests or
-working material. `python scripts/keel_gen_editions.py --distribution`
-rebuilds it; `python scripts/keel_checks.py --distribution` fails if what is
-committed has drifted from what that command would write.
+```
+/plugin marketplace add policyon/keel
+/plugin install keel@policyon
+```
+
+Installing arms nothing. keel ships unarmed — gates enforce only in a project
+that carries its own `.keel/keel-policy.md` at an enforcing tier, and arming
+is the adopter's own act (`/keel:lay` walks it).
+
+What the install copies: the marketplace entry names `dist/keel` as its
+plugin source, not the repository root. That bundle is committed, so an
+install copies the bundle alone — never this repository's own session
+records, tests or working material. `python scripts/keel_gen_editions.py
+--distribution` rebuilds it; `python scripts/keel_checks.py --distribution`
+fails if what is committed has drifted from what that command would write.
 
 ## Documentation
 

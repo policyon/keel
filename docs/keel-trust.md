@@ -100,9 +100,10 @@ opted in is never broken by keel's own bug.
 Two places, both on your own machine, and nothing anywhere else. This section
 exists because an earlier version of the bullet above claimed everything landed
 under the project's `.keel/` directory, and that was not true: four files live
-in your home directory by a ratified decision
-(.keel/decisions/2026-08-21-keel-owns-one-user-global-directory.md), for reasons
-that are about diagnosis and recovery rather than about keel's convenience.
+in your home directory by a ratified decision of 2026-08-21 (the decision
+record stays with the maintainer's development records — a published cut
+ships none), for reasons that are about diagnosis and recovery rather than
+about keel's convenience.
 
 **In the project — `.keel/`.** The session ledgers, the audit log, the
 observation queue, the knowledge and decision records: the whole record, in
@@ -251,10 +252,76 @@ in its policy-locked arming file, path prefixes where the lock's deny becomes
 allow-plus-loud-audit — each such write recorded as its own audit event and
 counted separately from bypasses, while the arming file, the settings files and
 the workshop list itself stay hard-locked, so the model can never widen its own
-workshop (keel's own project record,
-`.keel/decisions/2026-08-18-workshop-paths-ratified.md`). Nothing shipped
+workshop (ratified 2026-08-18 in keel's own project records; a published cut
+ships none of them). Nothing shipped
 changes for adopters: no template carries a workshop list, and a project that
 does not host the gate it is governed by has no use for one.
+
+## The gates fired on their own publication
+
+This repository was published under keel's own gates, and the release that
+put this page in front of you was itself refused, repeatedly, until it was
+right. Every incident below is from the publication sitting of 2026-09-07 or
+the sitting before it, happened to the session doing the publishing, and is
+the designed behaviour observed against the instrument's own maker — which
+is the strongest evidence this page can offer that the gates do what the
+sections above claim.
+
+- **The publication plan was refused before the first command ran.** The
+  session's first ledger draft failed the machine-checkable plan contract
+  with twelve findings (tasks without parseable acceptance criteria and
+  routes), and plan-before-write held every state-changing call until a
+  compliant ledger existed (hooks/keel_gate.py).
+- **keel refused its own release script.** The first attempt to run the
+  mirror cut was denied by the plan gate, because the mirror still carried
+  an armed policy from the previous cut and the gate resolves one verdict
+  per governing project — the target's law bound the writer, exactly as it
+  would for any adopter's tree. The refusal itself was audit-logged into the
+  target's own log.
+- **One stray line failed seven guards.** That logged refusal left a single
+  audit line in the mirror, and the published-cut declaration inverts the
+  self-assertions — so seven independent tests failed the mirror's suite,
+  each naming the one non-empty record surface, until a human cleared the
+  line. A cut cannot go out carrying even one line of session residue
+  without the suite saying so (tests/keel_published_cut.py).
+- **The suite gate caught a real red run in its first hour.** The wrapper
+  that refuses to call a suite green without the final summary line
+  (scripts/keel_suite.py) reported `FAILED (failures=4)` on its first real
+  use the sitting before publication, then passed the clean rerun — both on
+  the record.
+- **The version check refused even a sanctioned deletion.** The cut removes
+  the arming file by ratified design, and `keel_checks --policy` still
+  failed the staged deletion until the commit made it real — the check
+  would not take the cut script's word for it. (That the failure message
+  misnames the case is filed as a defect in the maintainer's queue; the
+  refusal standing is the point.)
+- **The tree-staleness check caught keel soiling its own distribution.**
+  `keel_checks --distribution` failed the publishing session's tree because
+  keel's own hooks had compiled bytecode into the shipped bundle — measured
+  twice, once within fourteen seconds of a hand deletion — and stayed red
+  until a regeneration made the committed bundle byte-identical to its
+  sources again.
+- **The cut script refuses to stand next to a remote.** Re-cutting the
+  mirror after it had gained its GitHub remote was refused by the script's
+  own guard: publishing is the owner's act, so the assembler will not run
+  where a push is reachable (scripts/keel_cut_mirror.py).
+- **The lock refused the publisher a read it could not classify.** The
+  session's attempt to read keel's user-global error log through an
+  interpreter one-liner was denied — the gate cannot tell a read from a
+  write inside an interpreter, so it refuses either way — and the same
+  information was read a moment later through a plain allowlisted command.
+- **The stop gate blocked the publishing session three times.** Each time a
+  turn tried to end with the ledger not accounting for every item — open
+  tasks after castoff, an in-flight claim with no delegation on the audit
+  record, a task added and left open — the stop was refused with the items
+  named, and the turn ended only after the ledger told the truth
+  (hooks/keel_stop.py).
+
+None of this was staged for this page: the refusals are ordinary audit lines
+in the maintainer's development records, of exactly the kind every armed
+project accumulates. The release you are reading cleared eleven repository
+checks and a 3088-test suite run inside the published tree itself, through
+the same wrapper that had refused the red run days earlier.
 
 ## Who trusts what
 
