@@ -1,0 +1,23 @@
+{
+  "name": "a-drifted-pin-warns-and-still-passes",
+  "direction": "pass",
+  "description": "the source moved: reported, never a failure - a human judges drift",
+  "today": "2026-08-01",
+  "sources": {
+    "neighbour/.claude-plugin/plugin.json": {
+      "name": "neighbour",
+      "version": "9.9.9"
+    }
+  },
+  "records": {
+    "knowledge/pinned-to-a-neighbour.md": "---\nname: pinned-to-a-neighbour\ndescription: A record pinning a neighbouring plugin at the version it read.\ntype: knowledge\ngenerated: { by: \"machine:executor\", at: \"2026-08-01\" }\nverified: []\nstale_after: 2027-01-01\ncites:\n  - { source: \"neighbour/.claude-plugin/plugin.json\", version: \"0.0.1\", at: \"2026-08-01\" }\n---\n\nBody.\n"
+  },
+  "expect_exit": 0,
+  "expect_rules": [
+    "cites_drift"
+  ],
+  "expect_absent_rules": [
+    "cites_unverifiable",
+    "bad_cites"
+  ]
+}

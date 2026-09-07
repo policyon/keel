@@ -1,0 +1,15 @@
+{
+  "name": "an-executor-deep-with-no-model-is-flagged",
+  "direction": "flag",
+  "description": "a governed role declaring no model: field at all is the same drift as declaring the wrong one",
+  "agents": {
+    "executor-deep.md": "---\nname: executor-deep\ndescription: Use when a task is flagged COMPLEX.\ntools: Read, Grep, Glob, Write, Edit, Bash\n---\n\nBody.\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "model_missing"
+  ],
+  "expect_absent_rules": [
+    "model_mismatch"
+  ]
+}

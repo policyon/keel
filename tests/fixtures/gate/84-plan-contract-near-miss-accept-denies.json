@@ -1,0 +1,40 @@
+{
+  "name": "plan-contract-near-miss-accept-denies",
+  "direction": "block",
+  "description": "A malformed Accept field (the word separated from its colon by other text) is refused, naming missing_accept and the OFFENDING line, not the task's opening checkbox line.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": ".keel/plans/keel-plan-$SESS8.md",
+      "content": "# Session plan - $SESS8\n\n## Tasks\n\n- [ ] T1 A task with a malformed accept field.\n      Route: standard (keel:executor).\n      Accept (restated for convenience; see clause 1):\n      1. the suite is green.\n"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN CONTRACT",
+    "missing_accept",
+    "line 7",
+    "Accept (restated for convenience; see clause 1):",
+    "NEXT STEP:",
+    "\"permissionDecision\": \"deny\""
+  ],
+  "expect_stderr_contains": [
+    "missing_accept"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "plan_contract"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "armed-fresh-plan-allows",
+  "direction": "allow",
+  "description": "A ledger written this session satisfies the gate.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "src/app.py"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

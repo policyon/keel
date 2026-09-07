@@ -1,0 +1,33 @@
+{
+  "name": "a-redirect-at-a-locked-path-is-still-refused-not-merely-recorded",
+  "direction": "block",
+  "description": "E1's blast radius, asserted rather than argued: the control from BL11's own fixture set. A plain redirect at a locked file is classifiable, so the open world refuses it exactly as before and the new predicate never sees it - shell_policy_lock_unclassifiable is FALSE for anything the lock already stops, by its own second clause. If E1 had turned refusals into recordings this fixture would go green in the wrong direction, which is the failure mode a 'make it louder' change is most likely to have",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "echo x > hooks/keel_gate.py"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "POLICY LOCK (Bash)",
+    "there is no in-session unlock"
+  ],
+  "expect_audit_events": ["gate_block"],
+  "expect_audit_contains": [
+    "\"gate\": \"policy_lock\""
+  ]
+}

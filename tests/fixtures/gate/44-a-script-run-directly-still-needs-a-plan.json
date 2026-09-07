@@ -1,0 +1,30 @@
+{
+  "name": "a-script-run-directly-still-needs-a-plan",
+  "direction": "block",
+  "description": "The way around an interpreter list is to drop the interpreter, so a command word that names a file to execute is covered by the same reasoning and still needs a ledger.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "./scripts/release.sh --publish"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN GATE",
+    "\"permissionDecision\": \"deny\"",
+    "keel-plan-$SESS8.md"
+  ],
+  "expect_stderr_contains": [
+    "PLAN GATE"
+  ]
+}

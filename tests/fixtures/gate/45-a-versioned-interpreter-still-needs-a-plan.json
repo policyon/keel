@@ -1,0 +1,30 @@
+{
+  "name": "a-versioned-interpreter-still-needs-a-plan",
+  "direction": "block",
+  "description": "A version-decorated interpreter is the ordinary invocation on most Linux distributions, and it is still an interpreter: the command word is normalised (python3.11 - python3 - python) before the opaque-verb test, so php8.1, ruby3.0 and perl5.36 answer the same way. This command carries no path separator, no script suffix, no redirect and no mutating verb, so the normalised word is the only test that can deny it.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "python3.11 -m pytest -q"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN GATE",
+    "\"permissionDecision\": \"deny\"",
+    "keel-plan-$SESS8.md"
+  ],
+  "expect_stderr_contains": [
+    "PLAN GATE"
+  ]
+}

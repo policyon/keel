@@ -1,0 +1,39 @@
+{
+  "name": "unknown-relaxation-name-denies-and-names-it",
+  "direction": "block",
+  "description": "A name keel never shipped is a configuration error: the whole section is ignored, the full lock applies, and the refusal says which name was unknown.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n\n## Policy lock\n\nrelax:\n- release-version-bump\n- unlock-everything\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: cut the release | AC: version bumped\n"
+    },
+    {
+      "path": ".claude-plugin/plugin.json",
+      "text": "{\n  \"name\": \"fixture\",\n  \"version\": \"0.4.0\",\n  \"keywords\": [\"governance\", \"hooks\"]\n}\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": ".claude-plugin/plugin.json",
+      "old_string": "\"version\": \"0.4.0\"",
+      "new_string": "\"version\": \"0.5.0\""
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "POLICY LOCK",
+    "\"permissionDecision\": \"deny\"",
+    "unknown relaxation name 'unlock-everything'",
+    "is being ignored and the full default lock applies"
+  ],
+  "expect_stderr_contains": []
+}

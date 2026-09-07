@@ -1,0 +1,27 @@
+{
+  "name": "blocks-mixed-ledger-with-open-item",
+  "direction": "block",
+  "description": "One terminal item does not excuse the next.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [x] T1: done | AC: green\n- [ ] T2: still open | AC: it works\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "Stop"
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "STOP BLOCKED",
+    "1 plan item(s) still open"
+  ],
+  "expect_stderr_contains": []
+}

@@ -1,0 +1,40 @@
+{
+  "name": "a-mutating-command-at-an-ordinary-file-in-an-installation-runs",
+  "direction": "allow",
+  "description": "T507, the other direction of fixture 112 and the boundary BL57 demands: the line the command half draws is MUTATION AT A KERNEL PATH, never 'this command names the plugin cache'. The same mutating verb, the same installed tree, an ordinary file inside it - and it runs, judged by the session's own fresh ledger like any other command. A rule keyed on location instead of on the kernel set would refuse this, and would refuse the adopter's documented first step with it (fixture 100).",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/plugins/cache/policyon/keel/0.6.0/.keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - the record an install copies\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/plugins/cache/policyon/keel/0.6.0/notes.txt",
+      "text": "just a file an install happens to carry\n"
+    }
+  ],
+  "env": {
+    "HOME": "$PROJECT/../userhome",
+    "USERPROFILE": "$PROJECT/../userhome"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "sed -i s/a/b/ $PROJECT/../userhome/.claude/plugins/cache/policyon/keel/0.6.0/notes.txt"
+    }
+  },
+  "expect_exit": 0,
+  "expect_audit_events_absent": [
+    "gate_block"
+  ]
+}

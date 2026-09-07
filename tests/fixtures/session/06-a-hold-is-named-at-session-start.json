@@ -1,0 +1,29 @@
+{
+  "name": "a-hold-is-named-at-session-start",
+  "direction": "record",
+  "description": "a hold PRESENT and honoured: the '## Holds' section carries one column-zero bullet, and SessionStart names it in the orientation block with its own text, so a session is told about a standing constraint before it does anything",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n\n## Holds\n\n- no push until I review the migration\n"
+    }
+  ],
+  "invocations": [
+    {
+      "sub": "session",
+      "stdin": {
+        "hook_event_name": "SessionStart",
+        "source": "startup",
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    }
+  ],
+  "expect_exit": 0,
+  "expect_events": ["session_start"],
+  "expect_stdout_contains": [
+    "holds - 1 ACTIVE",
+    "no push until I review the migration",
+    "honour them"
+  ]
+}

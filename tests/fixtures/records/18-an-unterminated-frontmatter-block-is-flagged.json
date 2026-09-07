@@ -1,0 +1,16 @@
+{
+  "name": "an-unterminated-frontmatter-block-is-flagged",
+  "direction": "flag",
+  "description": "an opening --- with no close is a truncated record, not an absent one",
+  "today": "2026-08-01",
+  "records": {
+    "knowledge/truncated.md": "---\nname: truncated\ndescription: A record whose frontmatter block was never closed.\ntype: knowledge\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "unterminated_frontmatter"
+  ],
+  "expect_absent_rules": [
+    "no_frontmatter"
+  ]
+}

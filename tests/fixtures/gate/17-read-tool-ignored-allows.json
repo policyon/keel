@@ -1,0 +1,24 @@
+{
+  "name": "read-tool-ignored-allows",
+  "direction": "allow",
+  "description": "A read-only tool maps to no gated event; the gate says nothing at all.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": ".keel/keel-policy.md"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

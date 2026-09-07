@@ -1,0 +1,40 @@
+{
+  "name": "a-sed-in-place-on-a-ledger-still-denies",
+  "direction": "block",
+  "description": "The exemption is one shape wide: sed -i over a ledger is exactly the rewrite rule 3 exists to refuse, and it is still refused unread.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "sed -i 's/T1/T2/' .keel/plans/keel-plan-$SESS8.md"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN CONTRACT",
+    "Write or Edit tool",
+    "\"permissionDecision\": \"deny\""
+  ],
+  "expect_stderr_contains": [
+    "PLAN CONTRACT"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "plan_contract_shell"
+  ]
+}

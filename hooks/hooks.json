@@ -1,0 +1,130 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "timeout": 10,
+            "command": "R=\"${CLAUDE_PLUGIN_ROOT}\"; command -v cygpath >/dev/null 2>&1 && R=\"$(cygpath -u \"$R\")\"; for P in python3 python py; do \"$P\" -c 'import sys;sys.exit(sys.version_info[:2]<(3,10))' >/dev/null 2>&1 && exec \"$P\" \"$R/hooks/keel_hook.py\" session; done; echo 'keel: no Python 3.10+ found; hook skipped' >&2; exit 0"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "timeout": 10,
+            "async": true,
+            "command": "R=\"${CLAUDE_PLUGIN_ROOT}\"; command -v cygpath >/dev/null 2>&1 && R=\"$(cygpath -u \"$R\")\"; for P in python3 python py; do \"$P\" -c 'import sys;sys.exit(sys.version_info[:2]<(3,10))' >/dev/null 2>&1 && exec \"$P\" \"$R/hooks/keel_hook.py\" session; done; echo 'keel: no Python 3.10+ found; hook skipped' >&2; exit 0"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit|Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "timeout": 10,
+            "command": "R=\"${CLAUDE_PLUGIN_ROOT}\"; command -v cygpath >/dev/null 2>&1 && R=\"$(cygpath -u \"$R\")\"; for P in python3 python py; do \"$P\" -c 'import sys;sys.exit(sys.version_info[:2]<(3,10))' >/dev/null 2>&1 && exec \"$P\" \"$R/hooks/keel_hook.py\" gate; done; echo 'keel: no Python 3.10+ found; hook skipped' >&2; exit 0"
+          }
+        ]
+      },
+      {
+        "matcher": "Task|Agent|SendMessage",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "timeout": 10,
+            "async": true,
+            "command": "R=\"${CLAUDE_PLUGIN_ROOT}\"; command -v cygpath >/dev/null 2>&1 && R=\"$(cygpath -u \"$R\")\"; for P in python3 python py; do \"$P\" -c 'import sys;sys.exit(sys.version_info[:2]<(3,10))' >/dev/null 2>&1 && exec \"$P\" \"$R/hooks/keel_hook.py\" capture; done; echo 'keel: no Python 3.10+ found; hook skipped' >&2; exit 0"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit|Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "timeout": 10,
+            "async": true,
+            "command": "R=\"${CLAUDE_PLUGIN_ROOT}\"; command -v cygpath >/dev/null 2>&1 && R=\"$(cygpath -u \"$R\")\"; for P in python3 python py; do \"$P\" -c 'import sys;sys.exit(sys.version_info[:2]<(3,10))' >/dev/null 2>&1 && exec \"$P\" \"$R/hooks/keel_hook.py\" capture; done; echo 'keel: no Python 3.10+ found; hook skipped' >&2; exit 0"
+          }
+        ]
+      },
+      {
+        "matcher": "Task|Agent|SendMessage",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "timeout": 10,
+            "async": true,
+            "command": "R=\"${CLAUDE_PLUGIN_ROOT}\"; command -v cygpath >/dev/null 2>&1 && R=\"$(cygpath -u \"$R\")\"; for P in python3 python py; do \"$P\" -c 'import sys;sys.exit(sys.version_info[:2]<(3,10))' >/dev/null 2>&1 && exec \"$P\" \"$R/hooks/keel_hook.py\" capture; done; echo 'keel: no Python 3.10+ found; hook skipped' >&2; exit 0"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "timeout": 10,
+            "command": "R=\"${CLAUDE_PLUGIN_ROOT}\"; command -v cygpath >/dev/null 2>&1 && R=\"$(cygpath -u \"$R\")\"; for P in python3 python py; do \"$P\" -c 'import sys;sys.exit(sys.version_info[:2]<(3,10))' >/dev/null 2>&1 && exec \"$P\" \"$R/hooks/keel_hook.py\" stop; done; echo 'keel: no Python 3.10+ found; hook skipped' >&2; exit 0"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "timeout": 10,
+            "async": true,
+            "command": "R=\"${CLAUDE_PLUGIN_ROOT}\"; command -v cygpath >/dev/null 2>&1 && R=\"$(cygpath -u \"$R\")\"; for P in python3 python py; do \"$P\" -c 'import sys;sys.exit(sys.version_info[:2]<(3,10))' >/dev/null 2>&1 && exec \"$P\" \"$R/hooks/keel_hook.py\" subagent_stop; done; echo 'keel: no Python 3.10+ found; hook skipped' >&2; exit 0"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "timeout": 10,
+            "command": "R=\"${CLAUDE_PLUGIN_ROOT}\"; command -v cygpath >/dev/null 2>&1 && R=\"$(cygpath -u \"$R\")\"; for P in python3 python py; do \"$P\" -c 'import sys;sys.exit(sys.version_info[:2]<(3,10))' >/dev/null 2>&1 && exec \"$P\" \"$R/hooks/keel_hook.py\" prompt; done; echo 'keel: no Python 3.10+ found; hook skipped' >&2; exit 0"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "timeout": 10,
+            "async": true,
+            "command": "R=\"${CLAUDE_PLUGIN_ROOT}\"; command -v cygpath >/dev/null 2>&1 && R=\"$(cygpath -u \"$R\")\"; for P in python3 python py; do \"$P\" -c 'import sys;sys.exit(sys.version_info[:2]<(3,10))' >/dev/null 2>&1 && exec \"$P\" \"$R/hooks/keel_hook.py\" precompact; done; echo 'keel: no Python 3.10+ found; hook skipped' >&2; exit 0"
+          }
+        ]
+      }
+    ]
+  }
+}

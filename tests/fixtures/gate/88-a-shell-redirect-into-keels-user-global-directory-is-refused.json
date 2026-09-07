@@ -1,0 +1,46 @@
+{
+  "name": "a-shell-redirect-into-keels-user-global-directory-is-refused",
+  "direction": "block",
+  "description": "T231 through the other door: a guard that stops Write but not a redirect guards nothing, so the command half of the rule refuses a shell line that mutates the same file. The command names it with a tilde, which no gate-side resolution expands and only the running shell would - which is why the command half reads the text, exactly as the policy lock's own shell heuristic does.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/keel/keel-registry.json",
+      "text": "{\n  \"v\": 1,\n  \"projects\": []\n}\n"
+    }
+  ],
+  "env": {
+    "HOME": "$PROJECT/../userhome",
+    "USERPROFILE": "$PROJECT/../userhome"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "echo {} > ~/.claude/keel/keel-registry.json"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "KEEL USER-GLOBAL STATE",
+    "(Guardrail: user-global.)"
+  ],
+  "expect_stderr_contains": [
+    "KEEL USER-GLOBAL STATE"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "\"gate\": \"user_global\""
+  ]
+}

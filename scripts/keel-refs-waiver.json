@@ -1,0 +1,28 @@
+{
+  "_purpose": "Named, per-line exceptions to check_refs' path resolution (R18), read by scripts/keel_checks.py. Each entry names a file, a line and the exact unresolved path that line cites; --refs still fails on any unresolved path not listed here, including a different line of a file that already has an entry. Deliberately JSON, not markdown: check_refs only scans path-shaped citations inside tracked *.md files, so a nonexistent path can be named here without that naming becoming a fresh citation the checker tries to resolve. A listed entry whose violation no longer occurs is itself a failure (a stale waiver) — see check_refs' docstring.",
+  "waivers": [
+    {
+      "file": ".keel/plans/keel-plan-074ab77d.md",
+      "line": 279,
+      "path": "hooks/x.py",
+      "reason": "Illustrative placeholder inside a pre-contract-era session ledger. That ledger belongs to the session that wrote it and is never edited afterwards (project standing rule; precedent at .keel/decisions/2026-08-03-pre-contract-ledgers-frozen.md). Owner ruled 2026-08-11 (T115, keel-plan-4850df38.md) to waive this line rather than edit the ledger."
+    },
+    {
+      "file": ".keel/plans/keel-plan-074ab77d.md",
+      "line": 601,
+      "path": "hooks/x.py",
+      "reason": "Same placeholder, restated later in the same frozen ledger. Not edited for the same reason as the line-279 entry above."
+    },
+    {
+      "file": ".keel/plans/keel-plan-074ab77d.md",
+      "line": 919,
+      "path": "docs/Users/README", "reason": "Illustrative example path inside the same frozen, previous-session ledger; not edited per the standing rule cited in the line-279 entry above. (keel-leak: ignore - the path is an illustrative example in a frozen ledger, not a real home)"
+    },
+    {
+      "file": ".keel/plans/keel-plan-074ab77d.md",
+      "line": 941,
+      "path": "docs/Users/",
+      "reason": "Illustrative example path inside the same frozen, previous-session ledger; not edited per the standing rule cited in the line-279 entry above."
+    }
+  ]
+}

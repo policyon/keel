@@ -1,0 +1,39 @@
+{
+  "name": "a-workshop-entry-naming-the-arming-file-is-refused",
+  "direction": "block",
+  "description": "A workshop list may not name the file that carries it, or the model could widen its own workshop: the entry is ignored as if it had not been declared, the refusal is said out loud, and the write still denies.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n\n## Policy lock\n\nworkshop:\n- .keel/keel-policy.md\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": ".keel/keel-policy.md",
+      "content": "x = 1\n"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "POLICY LOCK",
+    "\"permissionDecision\": \"deny\""
+  ],
+  "expect_stderr_contains": [
+    "is IGNORED as if it had not been declared",
+    ".keel/keel-policy.md",
+    "POLICY LOCK"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ]
+}

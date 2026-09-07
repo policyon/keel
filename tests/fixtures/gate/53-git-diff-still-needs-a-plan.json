@@ -1,0 +1,30 @@
+{
+  "name": "git-diff-still-needs-a-plan",
+  "direction": "block",
+  "description": "Was an allow fixture until 2026-08-19. git left the read-only allowlist on 2026-08-19: with a matching '.gitattributes' attribute and a diff/filter/fsmonitor driver in config, git runs a program of the repository's choosing with no flag asked for, so an allowlisted git would be arbitrary execution the gate had blessed.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git diff"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN GATE",
+    "\"permissionDecision\": \"deny\"",
+    "keel-plan-$SESS8.md"
+  ],
+  "expect_stderr_contains": [
+    "PLAN GATE"
+  ]
+}

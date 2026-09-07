@@ -1,0 +1,28 @@
+{
+  "name": "policy-read-via-bash-allowed",
+  "direction": "allow",
+  "description": "False-positive guard: reading a protected file is not modifying it.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "grep -n tier .keel/keel-policy.md | head -5"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

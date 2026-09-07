@@ -1,0 +1,30 @@
+{
+  "name": "an-unparsable-command-still-needs-a-plan",
+  "direction": "block",
+  "description": "Fail safe: an unterminated quote abandons the scan, and what the gate cannot parse counts as mutating - so the read-only look of the line buys it nothing.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git status --short \"unclosed"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN GATE",
+    "\"permissionDecision\": \"deny\"",
+    "keel-plan-$SESS8.md"
+  ],
+  "expect_stderr_contains": [
+    "PLAN GATE"
+  ]
+}

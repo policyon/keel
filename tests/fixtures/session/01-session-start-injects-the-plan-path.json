@@ -1,0 +1,28 @@
+{
+  "name": "session-start-injects-the-plan-path",
+  "direction": "record",
+  "description": "in an adopted project SessionStart records the boundary and injects THIS session's ledger path",
+  "files": [
+    {"path": ".keel/keel-policy.md", "text": "---\ntier: 2\n---\n"}
+  ],
+  "invocations": [
+    {
+      "sub": "session",
+      "stdin": {
+        "hook_event_name": "SessionStart",
+        "source": "startup",
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    }
+  ],
+  "expect_exit": 0,
+  "expect_events": ["session_start"],
+  "expect_stdout_contains": [
+    ".keel/plans/keel-plan-$SESS8.md",
+    ".keel/keel-policy.md",
+    "plan-before-write"
+  ],
+  "expect_audit_contains": ["\"source\": \"startup\""],
+  "expect_audit_absent": ["$USERNAME"]
+}

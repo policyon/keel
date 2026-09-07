@@ -1,0 +1,28 @@
+{
+  "name": "an-absent-holds-section-is-not-a-none",
+  "direction": "record",
+  "description": "T168's rule end to end: an arming file with NO '## Holds' heading reports the absence as its own sentence, which is not the sentence an explicitly empty section produces. Absent and none are different facts about the world, and a session must be able to tell them apart from the line alone",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n\n## Policy lock\n\nrelax:\n- release-version-bump\n"
+    }
+  ],
+  "invocations": [
+    {
+      "sub": "session",
+      "stdin": {
+        "hook_event_name": "SessionStart",
+        "source": "startup",
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    }
+  ],
+  "expect_exit": 0,
+  "expect_events": ["session_start"],
+  "expect_stdout_contains": [
+    "holds - no '## Holds' section (nothing declared)",
+    "policy lock - in force"
+  ]
+}

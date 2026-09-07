@@ -1,0 +1,28 @@
+{
+  "name": "a-workshop-is-named-at-session-start",
+  "direction": "record",
+  "description": "the workshop DECLARED and surfaced: the '## Policy lock' section carries a 'workshop:' prefix, and SessionStart names it on the policy-lock orientation line, so a session can see which of its own source trees its model is permitted to rewrite before it writes anything. Enforced since T169, reported by nothing until T176",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n\n## Policy lock\n\nrelax:\n- release-version-bump\n\nworkshop:\n- hooks/\n"
+    }
+  ],
+  "invocations": [
+    {
+      "sub": "session",
+      "stdin": {
+        "hook_event_name": "SessionStart",
+        "source": "startup",
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    }
+  ],
+  "expect_exit": 0,
+  "expect_events": ["session_start"],
+  "expect_stdout_contains": [
+    "policy lock - in force",
+    "workshop: hooks/"
+  ]
+}

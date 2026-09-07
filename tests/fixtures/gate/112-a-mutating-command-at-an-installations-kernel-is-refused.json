@@ -1,0 +1,50 @@
+{
+  "name": "a-mutating-command-at-an-installations-kernel-is-refused",
+  "direction": "block",
+  "description": "T507, the command half of fixture 111. T506 guarded pre_write only, so a MUTATING COMMAND at an installed copy's own kernel reached no evaluator at all: the installed tree is demoted out of governance for a pre_exec event, and a session with no project of its own is answered by the unarmed allow before any rule runs. The command here rewrites the gate's own verdict. The session's project is armed AND carries a fresh ledger on purpose, so nothing else can be answering, and the audit line must name gate 'installed_kernel' rather than the session's own policy lock - the rule runs before governance, which is the whole of why it fires for a session that has no project either. HOME and USERPROFILE point at a throwaway directory inside the fixture's own temporary tree, so the real plugin cache is never read or written.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/plugins/cache/policyon/keel/0.6.0/.keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - the record an install copies\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/plugins/cache/policyon/keel/0.6.0/hooks/keel_gate.py",
+      "text": "# the installed gate\n"
+    }
+  ],
+  "env": {
+    "HOME": "$PROJECT/../userhome",
+    "USERPROFILE": "$PROJECT/../userhome"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "sed -i s/deny/allow/ $PROJECT/../userhome/.claude/plugins/cache/policyon/keel/0.6.0/hooks/keel_gate.py"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "KEEL INSTALLATION KERNEL",
+    "(Guardrail: installed-kernel.)"
+  ],
+  "expect_stderr_contains": [
+    "KEEL INSTALLATION KERNEL"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "\"gate\": \"installed_kernel\""
+  ]
+}

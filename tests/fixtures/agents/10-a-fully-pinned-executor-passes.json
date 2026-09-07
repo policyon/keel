@@ -1,0 +1,14 @@
+{
+  "name": "a-fully-pinned-executor-passes",
+  "direction": "pass",
+  "description": "a governed role (executor) with the model class the routing law assigns it draws no model finding",
+  "agents": {
+    "executor.md": "---\nname: executor\ndescription: Use when a scoped, specified task needs implementing at the standard tier.\ntools: Read, Grep, Glob, Write, Edit, Bash\nmodel: sonnet\n---\n\nBody.\n"
+  },
+  "expect_exit": 0,
+  "expect_rules": [],
+  "expect_absent_rules": [
+    "model_missing",
+    "model_mismatch"
+  ]
+}

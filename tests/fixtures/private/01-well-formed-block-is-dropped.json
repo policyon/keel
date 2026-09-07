@@ -1,0 +1,7 @@
+{
+  "name": "well-formed-block-is-dropped",
+  "description": "the ordinary case: everything between the markers goes, everything outside stays",
+  "input": "key rotated <keel-private>AKIA-secret-value</keel-private> on tuesday",
+  "expect_output": "key rotated  on tuesday",
+  "expect_warning": false
+}

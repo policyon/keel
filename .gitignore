@@ -1,0 +1,27 @@
+__pycache__/
+*.pyc
+.keel/cache/
+
+# Generated edition bundles: rebuildable from the registry, never shipped as source.
+build/
+
+# dist/ IS TRACKED, and that is not a contradiction of the line above - the two
+# say different things about different trees, so both are stated here rather
+# than left to disagree in silence. build/ is scratch: a local generator run,
+# regenerable, of interest to nobody but the machine that made it. dist/keel is
+# the DISTRIBUTION - the bundle .claude-plugin/marketplace.json points an
+# install at - and it is committed so a fresh clone installs with no build
+# step. It is still "rebuildable from the registry": keel_checks
+# --distribution regenerates it and fails when the committed bytes differ, so
+# tracking it buys the clone convenience without letting the tree become an
+# authored artifact that drifts from its sources. Owner's ruling, 2026-09-06.
+
+.pytest_cache/
+
+# Internal working material: never shipped, never published.
+docs/internal/
+
+# Session-runtime artifacts written into this project by installed harnesses
+# (observability logs and local settings). Runtime state, never keel source.
+.claude/
+*.stackdump

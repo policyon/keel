@@ -1,0 +1,20 @@
+{
+  "name": "no-ledger-allows",
+  "direction": "allow",
+  "description": "A session that wrote no ledger has nothing to account for.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "Stop"
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

@@ -1,0 +1,17 @@
+{
+  "name": "an-agent-with-no-tools-key-is-flagged",
+  "direction": "flag",
+  "description": "no tools field means inherit everything, including Write, on the one machine nobody checked",
+  "agents": {
+    "helper-fixture.md": "---\nname: helper-fixture\ndescription: An agent that forgot its tools list entirely.\n---\n\nBody.\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "missing_tools"
+  ],
+  "expect_absent_rules": [
+    "missing_name",
+    "missing_description",
+    "reviewer_tools"
+  ]
+}

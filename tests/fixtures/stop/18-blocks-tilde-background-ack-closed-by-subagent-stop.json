@@ -1,0 +1,31 @@
+{
+  "name": "blocks-tilde-background-ack-closed-by-subagent-stop",
+  "direction": "block",
+  "description": "T348: the same slow (19s) background-ack pair as fixture 17, but a subagent_stop later names the launched agent id - a finished agent must never permit [~], whatever the recorded background field said about the launch. background:true only excuses the elapsed-time guess; it is not itself proof of an OPEN delegation once a stop names it closed.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [~] T1: delegated to executor | AC: it works\n"
+    },
+    {
+      "path": ".keel/audit/keel-audit.jsonl",
+      "text": "{\"v\": 1, \"ts\": \"$TS(-319)\", \"event\": \"handoff_start\", \"session\": \"$SESSION\", \"tool_use_id\": \"tu_bgack_2\", \"subagent_type\": \"executor\", \"description\": \"T1\"}\n{\"v\": 1, \"ts\": \"$TS(-300)\", \"event\": \"handoff_end\", \"session\": \"$SESSION\", \"tool_use_id\": \"tu_bgack_2\", \"agent_id\": \"ag_bgack_2\", \"subagent_type\": \"executor\", \"description\": \"T1\", \"background\": true}\n{\"v\": 1, \"ts\": \"$TS(-60)\", \"event\": \"subagent_stop\", \"session\": \"$SESSION\", \"agent_type\": \"executor\", \"agent_id\": \"ag_bgack_2\"}\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "Stop"
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "STOP BLOCKED",
+    "no active delegation"
+  ],
+  "expect_stderr_contains": []
+}

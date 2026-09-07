@@ -1,0 +1,25 @@
+{
+  "name": "write-records-a-relative-action",
+  "direction": "record",
+  "description": "PostToolUse on Write writes one action line whose target is project-relative, not absolute",
+  "files": [
+    {"path": ".keel/keel-policy.md", "text": "---\ntier: 1\n---\n"}
+  ],
+  "invocations": [
+    {
+      "sub": "capture",
+      "stdin": {
+        "hook_event_name": "PostToolUse",
+        "tool_name": "Write",
+        "tool_input": {"file_path": "$PROJECT/src/app.py"},
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    }
+  ],
+  "expect_exit": 0,
+  "expect_stdout_empty": true,
+  "expect_events": ["activity"],
+  "expect_audit_contains": ["\"detail\": \"src/app.py\"", "\"tool\": \"Write\""],
+  "expect_audit_absent": ["$PROJECT", "$USERNAME"]
+}

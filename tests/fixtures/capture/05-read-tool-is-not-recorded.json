@@ -1,0 +1,23 @@
+{
+  "name": "read-tool-is-not-recorded",
+  "direction": "silent",
+  "description": "Read/Grep/Glob are deliberately not observed - chatty and low value, so nothing is written",
+  "files": [
+    {"path": ".keel/keel-policy.md", "text": "---\ntier: 1\n---\n"}
+  ],
+  "invocations": [
+    {
+      "sub": "capture",
+      "stdin": {
+        "hook_event_name": "PostToolUse",
+        "tool_name": "Read",
+        "tool_input": {"file_path": "src/app.py"},
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    }
+  ],
+  "expect_exit": 0,
+  "expect_stdout_empty": true,
+  "expect_no_audit": true
+}

@@ -1,0 +1,27 @@
+{
+  "name": "unreadable-tier-fails-closed",
+  "direction": "block",
+  "description": "Declared failure policy in action: armed project, tier unreadable, so the gate denies rather than guessing (R3).",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\nname: broken-fixture\n---\n\n# frontmatter without a tier\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "src/app.py"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "FAILED CLOSED",
+    "\"permissionDecision\": \"deny\""
+  ],
+  "expect_stderr_contains": []
+}

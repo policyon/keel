@@ -1,0 +1,17 @@
+{
+  "name": "an-assessment-without-stale-after-is-flagged",
+  "direction": "flag",
+  "description": "an assessment judges a moving world and must carry an expiry",
+  "today": "2026-08-01",
+  "records": {
+    "knowledge/three-repo-read.md": "---\nname: three-repo-read\ndescription: What the audited repositories looked like when they were read.\ntype: assessment\ngenerated: { by: \"machine:researcher\", at: \"2026-08-01\" }\nverified: []\n---\n\nBody.\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "assessment_without_stale_after",
+    "assessment_without_cites"
+  ],
+  "expect_absent_rules": [
+    "expired"
+  ]
+}

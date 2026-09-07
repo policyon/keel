@@ -1,0 +1,30 @@
+{
+  "name": "git-ls-files-still-needs-a-plan",
+  "direction": "block",
+  "description": "The closest git subcommand to defensible, and it leaves too: 'I could not think of a driver for this one' is not the claim the allowlist makes about its members, and a word may only join on the claim.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git ls-files hooks"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN GATE",
+    "\"permissionDecision\": \"deny\"",
+    "keel-plan-$SESS8.md"
+  ],
+  "expect_stderr_contains": [
+    "PLAN GATE"
+  ]
+}

@@ -1,0 +1,105 @@
+name: keel-ci
+
+# R27/R33: continuous integration exists before the first hook is written, and
+# it runs on three operating systems from Phase 0. Non-negotiable.
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: checks · ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    defaults:
+      run:
+        # One shell on all three runners: no PowerShell/bash divergence (R1).
+        shell: bash
+    steps:
+      # Action majors are kept current deliberately: the previous pins ran on
+      # the deprecated Node 20 runtime and annotated every job with it. A
+      # deprecation warning nobody clears is how a build learns to be ignored.
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.10"
+
+      # NO FLAGS, deliberately: a hand-kept flag list here went stale the first
+      # time a check was added (--policy was defined and invoked nowhere that
+      # gates a push). With no arguments the script runs every check it
+      # registers, so the next one gates pushes the moment it exists.
+      - name: Repository checks (every check keel_checks.py registers)
+        run: python scripts/keel_checks.py
+
+      # The CLI entry point runs on all three operating systems, proven rather
+      # than assumed. survey is exit-0 by contract, so this step can only fail
+      # if the entry point itself cannot start - which is exactly the claim
+      # being tested. It also prints this repository's own arming state, which
+      # since the Phase 1 exit gate is tier 2 (D6).
+      - name: CLI entry point runs (survey --startup)
+        run: python scripts/keel.py survey --startup
+
+      # R13: hooks.json is generated from one bootstrap string and one entry
+      # table. The committed file must equal the generated one, or a hook has
+      # been hand-edited and the next regeneration will silently revert it.
+      - name: hooks.json is generated, not hand-written
+        run: python scripts/keel_gen_hooks.py --verify
+
+      # BL59: exit 0 alone is not proof the suite ran to completion - the
+      # full-discovery run has ended mid-suite with exit 0 and no final
+      # summary. This wrapper gates on the "Ran N tests" summary too.
+      - name: Unit tests
+        run: python scripts/keel_suite.py
+
+      # T21: one command validates every generated edition bundle (closure,
+      # manifest, hooks, exclusion) - run on every push, on every OS in the
+      # matrix, exactly like every other repository check above.
+      - name: Edition bundles validate (closure, manifest, hooks, exclusion)
+        run: python scripts/keel_gen_editions.py --validate
+
+      # Phase 0 SPIKE: prove the hook launcher fires on a clean Ubuntu, macOS
+      # and Windows runner. The launcher design freezes only when this is green
+      # on all three. The payload is built by Python so the workspace path is
+      # JSON-escaped correctly on Windows - no shell interpolation (R5).
+      #
+      # It runs in a SCRATCH project, not the checkout: since the Phase 1 exit
+      # gate keel is armed on its own repository, so .keel/audit/ there is a
+      # real record. Writing spike lines into it would both dirty that record
+      # and make "exactly one line" an assertion about the checkout's history
+      # rather than about this run.
+      - name: Hook-execution spike
+        run: |
+          mkdir -p "$RUNNER_TEMP/spike/.keel"
+          cd "$RUNNER_TEMP/spike"
+          python -c "import json,os,sys; sys.stdout.write(json.dumps({'cwd': os.getcwd(), 'session_id': 'ci'}))" | python "$GITHUB_WORKSPACE/hooks/keel_hook.py" spike
+          python - <<'PY'
+          import json, pathlib, sys
+
+          path = pathlib.Path(".keel") / "audit" / "keel-audit.jsonl"
+          if not path.is_file():
+              sys.exit("SPIKE FAILED: no audit file at %s" % path)
+          lines = [l for l in path.read_text(encoding="utf-8").splitlines() if l.strip()]
+          if len(lines) != 1:
+              sys.exit("SPIKE FAILED: expected exactly 1 audit line, got %d" % len(lines))
+          event = json.loads(lines[0])
+          expected = {"v": 1, "event": "spike", "session": "ci"}
+          for key, value in expected.items():
+              if event.get(key) != value:
+                  sys.exit("SPIKE FAILED: %s == %r, expected %r" % (key, event.get(key), value))
+          if not isinstance(event.get("ts"), str) or not event["ts"].endswith("Z"):
+              sys.exit("SPIKE FAILED: bad timestamp %r" % event.get("ts"))
+          print("SPIKE OK on %s: %s" % (sys.platform, lines[0]))
+          PY

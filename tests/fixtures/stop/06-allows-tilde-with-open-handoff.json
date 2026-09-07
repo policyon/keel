@@ -1,0 +1,28 @@
+{
+  "name": "allows-tilde-with-open-handoff",
+  "direction": "allow",
+  "description": "[~] verified against the audit log: an open hand-off is on record, so the item is genuinely in flight.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [~] T1: delegated to executor | AC: it works\n"
+    },
+    {
+      "path": ".keel/audit/keel-audit.jsonl",
+      "text": "{\"v\": 1, \"ts\": \"$TS(-30)\", \"event\": \"handoff_start\", \"session\": \"$SESSION\", \"tool_use_id\": \"tu_open_1\", \"subagent_type\": \"executor\", \"description\": \"T1\"}\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "Stop"
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

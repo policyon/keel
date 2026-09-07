@@ -1,0 +1,24 @@
+{
+  "name": "a-plain-find-needs-no-plan",
+  "direction": "allow",
+  "description": "find is read-only as long as none of its action flags appear, and it reads no configuration file that could name a program for it to run - so a plain search needs no ledger.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "find . -name '*.md' | wc -l"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

@@ -1,0 +1,41 @@
+{
+  "name": "plan-contract-shell-redirect-denies",
+  "direction": "block",
+  "description": "Rule 3 reaches the shell: a redirect into this session's ledger is refused unread, because the content it would leave behind cannot be contract-checked before it runs.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "echo '- [ ] do the thing' > .keel/plans/keel-plan-$SESS8.md"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN CONTRACT",
+    "NEXT STEP:",
+    "Write or Edit tool",
+    "\"permissionDecision\": \"deny\""
+  ],
+  "expect_stderr_contains": [
+    "PLAN CONTRACT"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "plan_contract_shell"
+  ]
+}

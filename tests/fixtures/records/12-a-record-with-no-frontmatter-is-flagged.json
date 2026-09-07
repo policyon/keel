@@ -1,0 +1,16 @@
+{
+  "name": "a-record-with-no-frontmatter-is-flagged",
+  "direction": "flag",
+  "description": "a markdown file in the record directory that never opted into the schema",
+  "today": "2026-08-01",
+  "records": {
+    "knowledge/bare.md": "# Bare notes\n\nNo frontmatter at all.\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "no_frontmatter"
+  ],
+  "expect_absent_rules": [
+    "unterminated_frontmatter"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "a-branch-checkout-naming-no-keel-path-is-allowed",
+  "direction": "allow",
+  "description": "Ordinary git flow: `git checkout <branch>` names no .keel/ path anywhere in its text, so the new rule has nothing to match and never reaches it - it is not read as a restore against a protected path just because `checkout` is one of the four restore-semantics subcommands.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git checkout main"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

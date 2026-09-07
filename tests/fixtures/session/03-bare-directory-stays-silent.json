@@ -1,0 +1,21 @@
+{
+  "name": "bare-directory-stays-silent",
+  "direction": "silent",
+  "description": "a project that never adopted keel gets no injected context and no audit file - silence, not noise",
+  "files": [],
+  "invocations": [
+    {
+      "sub": "session",
+      "stdin": {
+        "hook_event_name": "SessionStart",
+        "source": "startup",
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    }
+  ],
+  "expect_exit": 0,
+  "expect_stdout_empty": true,
+  "expect_no_audit": true,
+  "expect_empty_project": true
+}

@@ -1,0 +1,16 @@
+{
+  "name": "a-missing-name-is-flagged",
+  "direction": "flag",
+  "description": "a record retrieval cannot route on is as lost as one that rotted",
+  "today": "2026-08-01",
+  "records": {
+    "knowledge/nameless.md": "---\ndescription: A record with no name at all.\ntype: knowledge\ngenerated: { by: \"machine:executor\", at: \"2026-08-01\" }\nverified: []\nstale_after: 2027-01-01\n---\n\nBody.\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "missing_name"
+  ],
+  "expect_absent_rules": [
+    "missing_description"
+  ]
+}

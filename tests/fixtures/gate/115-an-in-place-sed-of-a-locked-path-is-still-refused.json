@@ -1,0 +1,35 @@
+{
+  "name": "an-in-place-sed-of-a-locked-path-is-still-refused",
+  "direction": "block",
+  "description": "The wall beside fixture 114's door, asserted end to end because a narrowing of a gate is only defensible with its limit shipped next to it: the same sed, the same locked path, one flag different, and the lock refuses with the override named. If T513 had withdrawn the refusal from sed as a WORD rather than from the one shape proven to print, this fixture would go green in the wrong direction",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "sed -i '1,20d' hooks/keel_gate.py"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "POLICY LOCK",
+    "\"permissionDecision\": \"deny\""
+  ],
+  "expect_stderr_contains": [
+    "POLICY LOCK (Bash)",
+    "there is no in-session unlock"
+  ],
+  "expect_audit_events": ["gate_block"],
+  "expect_audit_contains": ["\"gate\": \"policy_lock\""]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "a-ratified-decision-with-no-verifier-is-flagged",
+  "direction": "flag",
+  "description": "claiming ratification with verified: [] is a self-contradiction",
+  "today": "2026-08-01",
+  "records": {
+    "decisions/2026-08-01-unsigned-decision.md": "---\nname: 2026-08-01-unsigned-decision\ndescription: A decision claiming ratified status that nobody ratified.\ntype: decision\nstatus: ratified\ngenerated: { by: \"machine:executor\", at: \"2026-08-01\" }\nverified: []\n---\n\nBody.\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "ratified_unverified"
+  ],
+  "expect_absent_rules": [
+    "missing_verified"
+  ]
+}

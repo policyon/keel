@@ -1,0 +1,40 @@
+{
+  "name": "a-global-option-cannot-carry-a-keel-checkout-past-the-rule",
+  "direction": "block",
+  "description": "BL2/T318 retry. The bypass the first cut of this rule shipped, pinned so it cannot come back. `git -C <dir>` spells its value as a SEPARATE token, and a subcommand-finder that skipped 'every token starting with -' returned `/tmp` as the subcommand - which matches none of the four restore verbs, so the exact destructive command of the T314 incident reached disk with no deny and no audit row, for the price of five extra characters. Verified against the pre-fix code: it exited 0. Now `-C` is skipped WITH its value (`_GIT_VALUE_GLOBALS`), the subcommand reads `checkout`, and the refusal is the same one fixture 95 pins for the bare shape.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git -C /tmp checkout -- .keel/audit/keel-audit.jsonl"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "KEEL RECORD RESTORE",
+    "\"permissionDecision\": \"deny\"",
+    "(Guardrail: keel-restore.)"
+  ],
+  "expect_stderr_contains": [
+    "KEEL RECORD RESTORE"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "\"gate\": \"keel_restore\""
+  ]
+}

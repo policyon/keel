@@ -1,0 +1,24 @@
+{
+  "name": "a-read-only-command-needs-no-plan",
+  "direction": "allow",
+  "description": "The plan gate reaches state-changing tools only: with no ledger on file at all, a command that changes nothing is allowed - and naming a protected file while reading it is still not modifying it. (The first segment was 'git status' until 2026-08-19; git left the allowlist, so this fixture keeps its point with two words that never left.)",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "ls -la .keel && grep -n tier .keel/keel-policy.md"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

@@ -1,0 +1,37 @@
+{
+  "name": "an-overridden-workshop-write-is-recorded-as-a-workshop-write",
+  "direction": "allow",
+  "description": "Composition stays honest while the override is on: a workshop-listed target is recorded under the workshop kind, not as a bypass, so the log still distinguishes developing the product from evading its law.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n\n## Policy lock\n\nworkshop:\n- hooks/\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    }
+  ],
+  "env": {
+    "KEEL_OVERRIDE": "on"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "hooks/keel_gate.py",
+      "content": "x = 1\n"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": [],
+  "expect_audit_events": [
+    "workshop_write"
+  ],
+  "expect_audit_contains": [
+    "\"workshop\": \"hooks/\""
+  ]
+}

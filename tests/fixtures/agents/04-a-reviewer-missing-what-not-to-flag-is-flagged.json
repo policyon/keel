@@ -1,0 +1,17 @@
+{
+  "name": "a-reviewer-missing-what-not-to-flag-is-flagged",
+  "direction": "flag",
+  "description": "a reviewer with no negative space flags everything, and a reviewer that flags everything is ignored",
+  "agents": {
+    "reviewer-fixture.md": "---\nname: reviewer-fixture\ndescription: Use after an executor reports done, to check the fixture change against the house contract.\ntools: Read, Grep, Glob\nmodel: sonnet\n---\n\nYou are a fixture reviewer.\n\n## Scope\n\nOne question: does the fixture hold?\n\n## Confidence floor\n\nConfidence floor: 80%\n\nA finding below the floor is dropped, not hedged.\n\n## Verdict\n\nSTATUS: pass | fail\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "heading_missing"
+  ],
+  "expect_absent_rules": [
+    "floor_line",
+    "headings_out_of_order",
+    "reviewer_tools"
+  ]
+}

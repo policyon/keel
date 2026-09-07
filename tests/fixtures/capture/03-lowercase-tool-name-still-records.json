@@ -1,0 +1,24 @@
+{
+  "name": "lowercase-tool-name-still-records",
+  "direction": "record",
+  "description": "R1/convention 3: tool names are matched casefolded, so a lowercase 'edit' is still an action",
+  "files": [
+    {"path": ".keel/keel-policy.md", "text": "---\ntier: 1\n---\n"}
+  ],
+  "invocations": [
+    {
+      "sub": "capture",
+      "stdin": {
+        "hook_event_name": "posttooluse",
+        "tool_name": "edit",
+        "tool_input": {"file_path": "docs/keel-rules.md"},
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    }
+  ],
+  "expect_exit": 0,
+  "expect_stdout_empty": true,
+  "expect_events": ["activity"],
+  "expect_audit_contains": ["docs/keel-rules.md"]
+}

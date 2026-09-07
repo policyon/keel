@@ -1,0 +1,16 @@
+{
+  "name": "a-missing-verified-key-is-flagged",
+  "direction": "flag",
+  "description": "an absent key is a finding even though an empty list is not",
+  "today": "2026-08-01",
+  "records": {
+    "knowledge/unsigned.md": "---\nname: unsigned\ndescription: A record that never says whether anyone checked it.\ntype: knowledge\ngenerated: { by: \"machine:executor\", at: \"2026-08-01\" }\nstale_after: 2027-01-01\n---\n\nBody.\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "missing_verified"
+  ],
+  "expect_absent_rules": [
+    "bad_verified"
+  ]
+}

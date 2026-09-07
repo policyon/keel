@@ -1,0 +1,41 @@
+{
+  "name": "plan-contract-placeholder-denies",
+  "direction": "block",
+  "description": "A ledger write carrying banned placeholder vocabulary is refused, naming placeholder_phrase and the next step.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": ".keel/plans/keel-plan-$SESS8.md",
+      "content": "# Session plan - $SESS8\n\n## Tasks\n\n- [ ] T1 A task whose scope is TBD.\n      Route: standard (keel:executor).\n      Accept: the reviewer signs off.\n"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN CONTRACT",
+    "placeholder_phrase",
+    "TBD",
+    "NEXT STEP:",
+    "\"permissionDecision\": \"deny\"",
+    "keel-plan-$SESS8.md"
+  ],
+  "expect_stderr_contains": [
+    "PLAN CONTRACT"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "plan_contract",
+    "placeholder_phrase"
+  ]
+}

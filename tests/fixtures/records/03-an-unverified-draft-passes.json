@@ -1,0 +1,15 @@
+{
+  "name": "an-unverified-draft-passes",
+  "direction": "pass",
+  "description": "verified: [] is legal and meaningful - it says unverified out loud",
+  "today": "2026-08-01",
+  "records": {
+    "knowledge/keel-budget-scope.md": "---\nname: keel-budget-scope\ndescription: What the always-loaded token budget counts after wave 3.\ntype: knowledge\ngenerated: { by: \"machine:executor-deep\", at: \"2026-08-01\" }\nverified: []\nstale_after: 2027-01-01\n---\n\nFrontmatter plus hook commands. Nothing else.\n"
+  },
+  "expect_exit": 0,
+  "expect_rules": [],
+  "expect_absent_rules": [
+    "missing_verified",
+    "bad_verified"
+  ]
+}

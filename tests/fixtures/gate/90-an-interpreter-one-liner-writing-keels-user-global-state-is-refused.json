@@ -1,0 +1,46 @@
+{
+  "name": "an-interpreter-one-liner-writing-keels-user-global-state-is-refused",
+  "direction": "block",
+  "description": "T231's retry, the shape the isolated review found silently passing: a python one-liner opens keel's registry by name and writes it. It carries no redirect and no mutating verb, so a name-based mutation heuristic sees nothing to match and the write lands with no deny, no bypass line and no audit row. The command half now judges a segment that NAMES the directory by the closed read-only allowlist instead: python is not on it, so this is refused.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/keel/keel-registry.json",
+      "text": "{\n  \"v\": 1,\n  \"projects\": []\n}\n"
+    }
+  ],
+  "env": {
+    "HOME": "$PROJECT/../userhome",
+    "USERPROFILE": "$PROJECT/../userhome"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "python3 -c \"import os; open(os.path.expanduser('~/.claude/keel/keel-registry.json'), 'w').write('{}')\""
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "KEEL USER-GLOBAL STATE",
+    "(Guardrail: user-global.)"
+  ],
+  "expect_stderr_contains": [
+    "KEEL USER-GLOBAL STATE"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "\"gate\": \"user_global\""
+  ]
+}

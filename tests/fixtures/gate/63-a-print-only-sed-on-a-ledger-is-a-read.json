@@ -1,0 +1,24 @@
+{
+  "name": "a-print-only-sed-on-a-ledger-is-a-read",
+  "direction": "allow",
+  "description": "The measured false positive of 2026-08-18: a print-only sed over a session ledger was refused by the plan-contract screen, which assumed every sed mutates. A print leaves no content behind, so rule 3 has nothing to assert and rule 2's allowlist clears the read.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "sed -n '510,545p' .keel/plans/keel-plan-$SESS8.md"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

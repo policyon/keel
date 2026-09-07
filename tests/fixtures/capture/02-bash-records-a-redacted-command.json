@@ -1,0 +1,25 @@
+{
+  "name": "bash-records-a-redacted-command",
+  "direction": "record",
+  "description": "a shell command naming this user's home reaches the log as ~, never as the username (convention 5)",
+  "files": [
+    {"path": ".keel/keel-policy.md", "text": "---\ntier: 1\n---\n"}
+  ],
+  "invocations": [
+    {
+      "sub": "capture",
+      "stdin": {
+        "hook_event_name": "PostToolUse",
+        "tool_name": "Bash",
+        "tool_input": {"command": "cat $HOME/notes.txt"},
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    }
+  ],
+  "expect_exit": 0,
+  "expect_stdout_empty": true,
+  "expect_events": ["activity"],
+  "expect_audit_contains": ["cat ~/notes.txt"],
+  "expect_audit_absent": ["$USERNAME"]
+}

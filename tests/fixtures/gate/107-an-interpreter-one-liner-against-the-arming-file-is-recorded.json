@@ -1,0 +1,33 @@
+{
+  "name": "an-interpreter-one-liner-against-the-arming-file-is-recorded",
+  "direction": "allow",
+  "description": "E1, and THE ONE THAT MATTERS from BL11's 28 probes: a python one-liner opens the arming file by name and writes it. It carries no redirect and no verb on the mutating list, so the policy lock's open world has nothing to match and allows it - silently, against the very file whose protection is this product's headline claim. The lock's own CLOSED world (the mode the user-global rule already runs) would have stopped the same text, and the gap between the two answers is now on the record as lock_unclassifiable. The command is STILL ALLOWED: closing the gap would refuse every read reaching a locked path through an unlisted word, a trade nobody has made. This fixture pins the record, not a refusal",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "python -c \"open('.keel/keel-policy.md','w').write('x')\""
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": [],
+  "expect_audit_events": ["lock_unclassifiable"],
+  "expect_audit_events_absent": ["gate_bypass", "gate_block"],
+  "expect_audit_contains": [
+    "\"gate\": \"policy_lock\"",
+    "\"target\": \"python -c \\\"open('.keel/keel-policy.md','w').write('x')\\\"\""
+  ]
+}

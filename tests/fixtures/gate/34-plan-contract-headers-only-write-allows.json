@@ -1,0 +1,25 @@
+{
+  "name": "plan-contract-headers-only-write-allows",
+  "direction": "allow",
+  "description": "A ledger with no task lines at all is not refused by the contract assertion: emptiness is plan-before-write's question, already asked.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": ".keel/plans/keel-plan-$SESS8.md",
+      "content": "# Session plan - $SESS8\n\n## Constraints\n\nnone yet.\n\n## Tasks\n"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

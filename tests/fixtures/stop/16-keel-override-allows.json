@@ -1,0 +1,30 @@
+{
+  "name": "keel-override-allows",
+  "direction": "allow",
+  "description": "User-only kill switch of last resort - and while it is on, every stop reminds the user that the lock is suspended and how to restore it.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "env": {
+    "KEEL_OVERRIDE": "on"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "Stop"
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": [
+    "POLICY LOCK SUSPENDED",
+    "Restore the lock by clearing KEEL_OVERRIDE"
+  ],
+  "expect_audit_events": ["override_active_at_stop"]
+}

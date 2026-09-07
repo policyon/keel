@@ -1,0 +1,44 @@
+{
+  "name": "the-override-carries-a-user-global-write-and-is-recorded",
+  "direction": "allow",
+  "description": "T231, the permitting direction of the same write: KEEL_OVERRIDE=on carries it exactly as it carries the policy lock, and the switch's use is on the record as a gate_bypass line naming THIS rule rather than the lock. The ledger is fresh, so the fall-through to the plan gate - which no override suspends - allows as well.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/keel/keel-registry.json",
+      "text": "{\n  \"v\": 1,\n  \"projects\": []\n}\n"
+    }
+  ],
+  "env": {
+    "HOME": "$PROJECT/../userhome",
+    "USERPROFILE": "$PROJECT/../userhome",
+    "KEEL_OVERRIDE": "on"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "$PROJECT/../userhome/.claude/keel/keel-registry.json",
+      "content": "{}\n"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": [],
+  "expect_audit_events": [
+    "gate_bypass"
+  ],
+  "expect_audit_contains": [
+    "\"gate\": \"user_global\"",
+    "\"switch\": \"KEEL_OVERRIDE\""
+  ]
+}

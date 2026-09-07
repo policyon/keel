@@ -1,0 +1,36 @@
+{
+  "name": "a-neighbour-of-keels-user-global-directory-is-not-refused",
+  "direction": "allow",
+  "description": "T231's no-widening direction: the rule reaches ONE ratified directory, so a user-global file BESIDE it - sharing its parent and even the first letters of its name - is not keel's and is not refused. The write is allowed by the ordinary rules (fresh ledger, nothing locked), which is exactly what an unrelated path outside every project has always got.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/keel-notes.txt",
+      "text": "not keel's own state\n"
+    }
+  ],
+  "env": {
+    "HOME": "$PROJECT/../userhome",
+    "USERPROFILE": "$PROJECT/../userhome"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "$PROJECT/../userhome/.claude/keel-notes.txt",
+      "content": "still not keel's own state\n"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

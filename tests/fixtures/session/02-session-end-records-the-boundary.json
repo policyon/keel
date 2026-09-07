@@ -1,0 +1,23 @@
+{
+  "name": "session-end-records-the-boundary",
+  "direction": "record",
+  "description": "SessionEnd appends one line with the harness's reason and injects nothing at all",
+  "files": [
+    {"path": ".keel/keel-policy.md", "text": "---\ntier: 2\n---\n"}
+  ],
+  "invocations": [
+    {
+      "sub": "session",
+      "stdin": {
+        "hook_event_name": "SessionEnd",
+        "reason": "clear",
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    }
+  ],
+  "expect_exit": 0,
+  "expect_stdout_empty": true,
+  "expect_events": ["session_end"],
+  "expect_audit_contains": ["\"reason\": \"clear\""]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "a-git-diff-output-flag-still-needs-a-plan",
+  "direction": "block",
+  "description": "'git diff --output=<file>' writes a file no shell redirect names. It was the disqualifier that kept git on the allowlist honest; since 2026-08-19 the whole word is off the list, so this invocation is refused for the broader reason too, and the narrow one is pinned here in case a future reader is tempted to re-admit git by flag.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git diff --output=pwned.txt"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN GATE",
+    "\"permissionDecision\": \"deny\"",
+    "keel-plan-$SESS8.md"
+  ],
+  "expect_stderr_contains": [
+    "PLAN GATE"
+  ]
+}

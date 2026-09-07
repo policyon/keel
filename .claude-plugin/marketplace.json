@@ -1,0 +1,16 @@
+{
+  "name": "policyon",
+  "owner": {
+    "name": "Ismail Saleh"
+  },
+  "plugins": [
+    {
+      "name": "keel",
+      "source": "./dist/keel",
+      "description": "Governed agent harness: plan-before-write and stop-with-accounting gates, policy lock, audited delegation, budgeted knowledge, non-destructive migration."
+    }
+  ],
+  "metadata": {
+    "description": "keel \u2014 governed agent harness: enforcement gates, budgeted knowledge, audited delegation, non-destructive migration."
+  }
+}

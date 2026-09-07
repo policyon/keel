@@ -1,0 +1,7 @@
+{
+  "name": "two-blocks-are-two-blocks",
+  "description": "non-greedy matching: two marked regions do not merge into one that swallows the text between them",
+  "input": "a <keel-private>first</keel-private> keep me <keel-private>second</keel-private> b",
+  "expect_output": "a  keep me  b",
+  "expect_warning": false
+}

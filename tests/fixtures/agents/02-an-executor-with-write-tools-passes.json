@@ -1,0 +1,15 @@
+{
+  "name": "an-executor-with-write-tools-passes",
+  "direction": "pass",
+  "description": "the reviewer restriction must not flag executors: write tools on a non-reviewer with an explicit list are the design, not a defect",
+  "agents": {
+    "executor-fixture.md": "---\nname: executor-fixture\ndescription: Use when a scoped task needs implementing; writes are in scope by design.\ntools: Read, Grep, Glob, Write, Edit, Bash\n---\n\nImplement exactly one task, verify it, report.\n"
+  },
+  "expect_exit": 0,
+  "expect_rules": [],
+  "expect_absent_rules": [
+    "reviewer_tools",
+    "missing_tools",
+    "heading_missing"
+  ]
+}

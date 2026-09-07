@@ -1,0 +1,37 @@
+{
+  "name": "manifest-edit-touching-another-key-denies",
+  "direction": "block",
+  "description": "The relaxation is version-only by construction: enabled or not, a write that also changes another key stays denied.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n\n## Policy lock\n\nrelax:\n- release-version-bump\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: cut the release | AC: version bumped\n"
+    },
+    {
+      "path": ".claude-plugin/plugin.json",
+      "text": "{\n  \"name\": \"fixture\",\n  \"version\": \"0.4.0\",\n  \"keywords\": [\"governance\", \"hooks\"]\n}\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": ".claude-plugin/plugin.json",
+      "content": "{\n  \"name\": \"fixture\",\n  \"version\": \"0.5.0\",\n  \"keywords\": [\"governance\", \"hooks\", \"surprise\"]\n}\n"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "POLICY LOCK",
+    "\"permissionDecision\": \"deny\"",
+    "is enabled here, but this write changes"
+  ],
+  "expect_stderr_contains": []
+}

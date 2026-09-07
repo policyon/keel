@@ -1,0 +1,16 @@
+{
+  "name": "a-decision-with-stale-after-is-flagged",
+  "direction": "flag",
+  "description": "a ratified decision is a historical fact; it retires by supersession",
+  "today": "2026-08-01",
+  "records": {
+    "decisions/2026-08-01-expiring-decision.md": "---\nname: 2026-08-01-expiring-decision\ndescription: A decision that wrongly claims it goes stale on a date.\ntype: decision\nstatus: ratified\ngenerated: { by: \"machine:executor\", at: \"2026-08-01\" }\nverified:\n  - { by: \"human:operator\", at: \"2026-08-01\" }\nstale_after: 2027-01-01\n---\n\nBody.\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "decision_with_stale_after"
+  ],
+  "expect_absent_rules": [
+    "expired"
+  ]
+}

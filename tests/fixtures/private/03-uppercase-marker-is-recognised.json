@@ -1,0 +1,7 @@
+{
+  "name": "uppercase-marker-is-recognised",
+  "description": "matching is case-insensitive by default: a shouted marker excludes exactly as much (R1, R10)",
+  "input": "key rotated <KEEL-PRIVATE>AKIA-secret-value</KEEL-PRIVATE> on tuesday",
+  "expect_output": "key rotated  on tuesday",
+  "expect_warning": false
+}

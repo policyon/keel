@@ -1,0 +1,39 @@
+{
+  "name": "plan-contract-missing-route-denies",
+  "direction": "block",
+  "description": "A ledger write whose task states no 'Route:' is refused, naming missing_route and the task's line.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": ".keel/plans/keel-plan-$SESS8.md",
+      "content": "# Session plan - $SESS8\n\n## Tasks\n\n- [ ] T1 A task carrying acceptance criteria and no route at all.\n      Accept: the kernel suite is green.\n"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN CONTRACT",
+    "missing_route",
+    "line 5",
+    "NEXT STEP:",
+    "\"permissionDecision\": \"deny\""
+  ],
+  "expect_stderr_contains": [
+    "missing_route"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "plan_contract"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "name": "an-all-read-only-pipeline-over-keels-user-global-state-still-runs",
+  "direction": "allow",
+  "description": "The other half of fixture 93, and the bound on what its taint may cost: naming the directory in one segment does NOT ban the pipe. Every segment here is on the read-only allowlist, so reading keel's registry through a pipeline - which is how the doctor, the board and any curious session actually look at it - still runs. This project carries NO ledger on purpose, so a regression that turned the spelled-taint into a blanket ban on pipelines shows up here as a block rather than as silence.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/keel/keel-registry.json",
+      "text": "{\n  \"v\": 1,\n  \"projects\": []\n}\n"
+    }
+  ],
+  "env": {
+    "HOME": "$PROJECT/../userhome",
+    "USERPROFILE": "$PROJECT/../userhome"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "cat ~/.claude/keel/keel-registry.json | grep projects | wc -l"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

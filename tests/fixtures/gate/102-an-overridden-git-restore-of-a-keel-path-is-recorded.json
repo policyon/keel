@@ -1,0 +1,35 @@
+{
+  "name": "an-overridden-git-restore-of-a-keel-path-is-recorded",
+  "direction": "allow",
+  "description": "THE OVERRIDE COMPOSES, exactly as it does for the policy lock: KEEL_OVERRIDE=on carries the write, and its own gate_bypass line names this rule (`keel_restore`) apart from every other kind of suspended refusal, so a reader of the log can count destructive git commands against keel's own record surfaces on their own.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "env": {
+    "KEEL_OVERRIDE": "on"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git checkout -- .keel/audit/keel-audit.jsonl"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": [],
+  "expect_audit_events": ["gate_bypass"],
+  "expect_audit_contains": [
+    "\"gate\": \"keel_restore\"",
+    "\"target\": \"git checkout -- .keel/audit/keel-audit.jsonl\", \"switch\": \"KEEL_OVERRIDE\""
+  ]
+}

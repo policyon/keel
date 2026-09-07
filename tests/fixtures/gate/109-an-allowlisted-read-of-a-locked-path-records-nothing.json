@@ -1,0 +1,29 @@
+{
+  "name": "an-allowlisted-read-of-a-locked-path-records-nothing",
+  "direction": "allow",
+  "description": "E1's noise floor, in the direction that keeps it usable: a read whose command word is on the closed mode's read-only allowlist names a locked path and is judged silent by BOTH worlds, so the predicate is false and no line is written. Without this, 'record what the lock cannot classify' would degrade into recording every command that mentions hooks/, and a log where everything is remarkable records nothing. What this fixture does NOT claim: that all reads are silent - a read through a word the allowlist does not name (jq, git diff) IS recorded, because no matcher can tell it from a write, and that residue is the measured 3.24%",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "cat hooks/keel_gate.py"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": [],
+  "expect_audit_events": [],
+  "expect_audit_events_absent": ["lock_unclassifiable"]
+}

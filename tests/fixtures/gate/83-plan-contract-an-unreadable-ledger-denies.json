@@ -1,0 +1,43 @@
+{
+  "name": "plan-contract-an-unreadable-ledger-denies",
+  "direction": "block",
+  "description": "An Edit whose ledger cannot be READ is refused: keel does not know what the file holds, and reading unknown text as empty would check nothing and allow everything. The unreadable ledger is staged as a DIRECTORY at the ledger path - the one shape every platform refuses to read as text, standing in for the Windows lock the reviewer named - so the fault is a real OSError that is not FileNotFoundError, which is the distinction the gate draws.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md/held-open-by-something-else.txt",
+      "text": "this file's PARENT is the ledger path, so the ledger is a directory\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": ".keel/plans/keel-plan-$SESS8.md",
+      "old_string": "      Accept: the kernel suite is green.\n",
+      "new_string": "      Accept: TBD.\n"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN CONTRACT",
+    "read failed",
+    "NOT empty text",
+    "\"permissionDecision\": \"deny\""
+  ],
+  "expect_stderr_contains": [
+    "PLAN CONTRACT"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "plan_contract"
+  ]
+}

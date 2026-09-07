@@ -1,0 +1,28 @@
+{
+  "name": "a-global-option-does-not-make-an-ordinary-checkout-a-refusal",
+  "direction": "allow",
+  "description": "BL2/T318 retry. The precision half of fixture 103, and the reason the fix reads `-C`'s value rather than merely distrusting any command that carries one: skipping the option WITH its value must still land on the real subcommand and then still ask the .keel/ NAME test, which this command fails - it names ordinary source. This fixture cannot fail against the pre-fix code (that code allowed every `-C` shape, correct here for the wrong reason); it is here to fail against an OVER-broad fix, the one that would refuse a whole command because a global option confused it.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_input": {
+      "command": "git -C /tmp checkout -- src/ok.py"
+    },
+    "tool_name": "Bash"
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

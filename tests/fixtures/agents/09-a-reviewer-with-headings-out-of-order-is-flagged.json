@@ -1,0 +1,17 @@
+{
+  "name": "a-reviewer-with-headings-out-of-order-is-flagged",
+  "direction": "flag",
+  "description": "all four headings present but the verdict arrives before the exclusions: presence is not conformance",
+  "agents": {
+    "reviewer-fixture.md": "---\nname: reviewer-fixture\ndescription: Use after an executor reports done, to check the fixture change against the house contract.\ntools: Read, Grep, Glob\nmodel: sonnet\n---\n\nYou are a fixture reviewer.\n\n## Scope\n\nOne question: does the fixture hold?\n\n## Confidence floor\n\nConfidence floor: 80%\n\nA finding below the floor is dropped, not hedged.\n\n## Verdict\n\nSTATUS: pass | fail\n\n## What NOT to flag\n\n- Style, naming, formatting.\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "headings_out_of_order"
+  ],
+  "expect_absent_rules": [
+    "heading_missing",
+    "floor_line",
+    "reviewer_tools"
+  ]
+}

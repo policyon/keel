@@ -1,0 +1,30 @@
+{
+  "name": "git-status-still-needs-a-plan",
+  "direction": "block",
+  "description": "The word that looks safest in git and is not: 'git status' runs core.fsmonitor's program and the clean filter of any path whose attributes name one - it must, to decide whether such a path is modified. So it leaves the allowlist with the rest of git, and the orientation castoff needs comes from the session-start lines instead.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git status"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN GATE",
+    "\"permissionDecision\": \"deny\"",
+    "keel-plan-$SESS8.md"
+  ],
+  "expect_stderr_contains": [
+    "PLAN GATE"
+  ]
+}

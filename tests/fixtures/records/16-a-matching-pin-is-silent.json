@@ -1,0 +1,21 @@
+{
+  "name": "a-matching-pin-is-silent",
+  "direction": "pass",
+  "description": "the pin resolves and agrees: this is what makes the field worth writing",
+  "today": "2026-08-01",
+  "sources": {
+    "neighbour/.claude-plugin/plugin.json": {
+      "name": "neighbour",
+      "version": "9.9.9"
+    }
+  },
+  "records": {
+    "knowledge/pinned-and-current.md": "---\nname: pinned-and-current\ndescription: A record whose pinned source still publishes that version.\ntype: knowledge\ngenerated: { by: \"machine:executor\", at: \"2026-08-01\" }\nverified: []\nstale_after: 2027-01-01\ncites:\n  - { source: \"neighbour/.claude-plugin/plugin.json\", version: \"9.9.9\", at: \"2026-08-01\" }\n---\n\nBody.\n"
+  },
+  "expect_exit": 0,
+  "expect_rules": [],
+  "expect_absent_rules": [
+    "cites_drift",
+    "cites_unverifiable"
+  ]
+}

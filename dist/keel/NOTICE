@@ -1,0 +1,40 @@
+keel, Copyright 2026 Ismail Saleh
+
+Licensed under the Apache License, Version 2.0. See LICENSE for the full text.
+
+
+Third-party attributions
+------------------------
+
+None. keel vendors no third-party code. Every runtime dependency is the
+Python 3.10+ standard library, so there is no bundled or inlined source to
+attribute here.
+
+If that ever changes — if any third-party text, prompt or code is adapted
+into this repository — the attribution its licence requires is recorded in
+this section, in the same change that introduces it. This file is where that
+obligation is discharged, and no other repository policy overrides it.
+
+
+Ported code
+-----------
+
+Portions of the following files are derived from earlier unpublished work by
+the same author (Copyright 2026 Ismail Saleh), included here under this
+repository's Apache-2.0 license at the author's direction (2026-08-01):
+
+- hooks/keel_gate.py
+- hooks/keel_stop.py
+- hooks/keel_redact.py
+- hooks/keel_capture.py
+- hooks/keel_session.py
+- scripts/keel_attest.py
+- scripts/keel_leak_check.py
+- scripts/keel_dashboard.py
+- scripts/keel_records.py
+- agents/executor.md, agents/executor-deep.md, agents/researcher.md
+- templates/keel-policy.md, .keel/keel-policy.md
+
+The derivation is behavioural as much as textual: where these files reproduce
+a rule, a threshold or a heuristic from that earlier work, the same
+attribution applies.

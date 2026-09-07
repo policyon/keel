@@ -1,0 +1,28 @@
+{
+  "name": "allows-tilde-background-launch-pair",
+  "direction": "allow",
+  "description": "handoff_end moments after handoff_start is a background launch acknowledgment, not a close.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [~] T1: delegated to executor | AC: it works\n"
+    },
+    {
+      "path": ".keel/audit/keel-audit.jsonl",
+      "text": "{\"v\": 1, \"ts\": \"$TS(-2)\", \"event\": \"handoff_start\", \"session\": \"$SESSION\", \"tool_use_id\": \"tu_bg_1\", \"subagent_type\": \"executor\", \"description\": \"T1\"}\n{\"v\": 1, \"ts\": \"$TS(-2)\", \"event\": \"handoff_end\", \"session\": \"$SESSION\", \"tool_use_id\": \"tu_bg_1\", \"subagent_type\": \"executor\", \"description\": \"T1\"}\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "Stop"
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

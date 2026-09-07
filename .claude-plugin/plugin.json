@@ -1,0 +1,21 @@
+{
+  "name": "keel",
+  "version": "0.6.0",
+  "description": "Governed agent harness: plan-before-write and stop-with-accounting gates, policy lock, audited delegation, budgeted knowledge, non-destructive migration.",
+  "author": {
+    "name": "Ismail Saleh"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "governance",
+    "enforcement",
+    "hooks",
+    "audit",
+    "policy",
+    "delegation",
+    "knowledge",
+    "migration",
+    "zero-dependency",
+    "claude-code"
+  ]
+}

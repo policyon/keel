@@ -1,0 +1,39 @@
+{
+  "name": "version-only-bump-without-the-section-denies",
+  "direction": "block",
+  "description": "Defaults ship exactly as before: with no Policy lock section the same edit is refused, and the refusal names the relaxation that would answer it.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: cut the release | AC: version bumped\n"
+    },
+    {
+      "path": ".claude-plugin/plugin.json",
+      "text": "{\n  \"name\": \"fixture\",\n  \"version\": \"0.4.0\",\n  \"keywords\": [\"governance\", \"hooks\"]\n}\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": ".claude-plugin/plugin.json",
+      "old_string": "\"version\": \"0.4.0\"",
+      "new_string": "\"version\": \"0.5.0\""
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "POLICY LOCK",
+    "\"permissionDecision\": \"deny\"",
+    "NEXT STEP: a version-only manifest write can be demoted to a prompt",
+    "release-version-bump"
+  ],
+  "expect_stderr_contains": []
+}

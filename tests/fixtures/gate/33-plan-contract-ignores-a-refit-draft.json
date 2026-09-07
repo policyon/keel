@@ -1,0 +1,25 @@
+{
+  "name": "plan-contract-ignores-a-refit-draft",
+  "direction": "allow",
+  "description": "Scope line: a non-ledger file under .keel/plans/ keeps the plain bootstrap allow, whatever its content says.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": ".keel/plans/refit-draft-$SESS8.md",
+      "content": "# Refit draft - not a ledger\n\n- [ ] a bullet with no identifier, no route, no accept, and TBD in it\n      handle appropriately, as needed, etc.\n"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

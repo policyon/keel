@@ -1,0 +1,35 @@
+{
+  "name": "the-lock-line-reports-the-override-that-suspends-it",
+  "direction": "record",
+  "description": "BL12/T375: with KEEL_OVERRIDE on against an armed project, the policy-lock orientation line reports the EFFECTIVE state - 'SUSPENDED by KEEL_OVERRIDE (declared: in force)' - instead of the declaration alone. It used to read 'in force' beside a switches line reading KEEL_OVERRIDE=on, two adjacent lines answering different questions with nothing to say so. The declared state and the tighten/relax/workshop values stay on the line because they remain true: they describe what comes back when the switch is cleared. This fixture asserts the two surfaces AGREE, carrying the POLICY LOCK SUSPENDED reminder and the suspended state segment out of one run",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n\n## Policy lock\n\nrelax:\n- release-version-bump\n\nworkshop:\n- hooks/\n"
+    }
+  ],
+  "env": {
+    "KEEL_OVERRIDE": "on"
+  },
+  "invocations": [
+    {
+      "sub": "session",
+      "stdin": {
+        "hook_event_name": "SessionStart",
+        "source": "startup",
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    }
+  ],
+  "expect_exit": 0,
+  "expect_events": ["session_start"],
+  "expect_stdout_contains": [
+    "policy lock - SUSPENDED by KEEL_OVERRIDE (declared: in force)",
+    "relax: release-version-bump",
+    "workshop: hooks/",
+    "POLICY LOCK SUSPENDED",
+    "KEEL_OVERRIDE=on"
+  ],
+  "expect_audit_absent": ["$USERNAME"]
+}

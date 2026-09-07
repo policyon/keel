@@ -1,0 +1,16 @@
+{
+  "name": "a-reviewer-with-a-malformed-floor-is-flagged",
+  "direction": "flag",
+  "description": "the floor line is a contract literal and its casing is part of the contract: the lowercase form is the other-case fixture the deliberately case-sensitive pattern requires",
+  "agents": {
+    "reviewer-fixture.md": "---\nname: reviewer-fixture\ndescription: Use after an executor reports done, to check the fixture change against the house contract.\ntools: Read, Grep, Glob\nmodel: sonnet\n---\n\nYou are a fixture reviewer.\n\n## Scope\n\nOne question: does the fixture hold?\n\n## Confidence floor\n\nconfidence floor: 80%\n\n## What NOT to flag\n\n- Style, naming, formatting.\n\n## Verdict\n\nSTATUS: pass | fail\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "floor_line"
+  ],
+  "expect_absent_rules": [
+    "heading_missing",
+    "reviewer_tools"
+  ]
+}

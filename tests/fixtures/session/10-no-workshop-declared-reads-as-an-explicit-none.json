@@ -1,0 +1,28 @@
+{
+  "name": "no-workshop-declared-reads-as-an-explicit-none",
+  "direction": "record",
+  "description": "the other direction: a '## Policy lock' section that declares NO workshop renders an explicit '(none)' on the same line, exactly as tighten and relax already do, so an absent declaration is a printed fact rather than a missing word a reader has to guess at (T168, convention 7)",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n\n## Policy lock\n\nrelax:\n- release-version-bump\n"
+    }
+  ],
+  "invocations": [
+    {
+      "sub": "session",
+      "stdin": {
+        "hook_event_name": "SessionStart",
+        "source": "startup",
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    }
+  ],
+  "expect_exit": 0,
+  "expect_events": ["session_start"],
+  "expect_stdout_contains": [
+    "policy lock - in force",
+    "workshop: (none)"
+  ]
+}

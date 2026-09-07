@@ -1,0 +1,17 @@
+# Line endings are a contract, not a preference (R2's neighbour: the same
+# Windows checkout that turns symlinks into text stubs turns LF into CRLF).
+# A hook launcher or a JSONL audit line committed with CRLF fails on the
+# other two operating systems of the CI matrix, so the repository fixes the
+# ending per type instead of trusting core.autocrlf.
+
+* text=auto
+
+*.py    text eol=lf
+*.md    text eol=lf
+*.json  text eol=lf
+*.yml   text eol=lf
+*.jsonl text eol=lf
+
+# The one exception: a Windows batch file must have CRLF or cmd.exe
+# mis-parses its last line.
+*.bat   text eol=crlf

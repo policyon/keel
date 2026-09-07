@@ -1,0 +1,45 @@
+{
+  "name": "the-sessions-own-project-still-judges-a-command-naming-an-installation",
+  "direction": "block",
+  "description": "T506, the other direction and the one that proves nothing was loosened: the SAME command naming the SAME installed tree, from a session whose own project IS armed and carries no ledger. Dropping the installation removes a judge that came from a shipped file; it does not excuse the command. The refusal is the session's own project's - which is also why the audit line lands here, in $PROJECT: while the installation still governed, the tie went to the target's project and the line was filed inside the plugin cache instead.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/plugins/cache/policyon/keel/0.6.0/.keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - the record an install copies\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/plugins/cache/policyon/keel/0.6.0/scripts/keel.py",
+      "text": "# the installed CLI\n"
+    }
+  ],
+  "env": {
+    "HOME": "$PROJECT/../userhome",
+    "USERPROFILE": "$PROJECT/../userhome"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "python $PROJECT/../userhome/.claude/plugins/cache/policyon/keel/0.6.0/scripts/keel.py survey"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN GATE"
+  ],
+  "expect_stderr_contains": [
+    "PLAN GATE"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "\"gate\": \"plan\""
+  ]
+}

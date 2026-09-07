@@ -1,0 +1,7 @@
+{
+  "name": "unclosed-marker-drops-the-remainder",
+  "description": "an opening marker with no close takes the rest of the value with it, and says so on stderr (R10)",
+  "input": "key rotated <keel-private>AKIA-secret-value and everything after it",
+  "expect_output": "key rotated ",
+  "expect_warning": true
+}

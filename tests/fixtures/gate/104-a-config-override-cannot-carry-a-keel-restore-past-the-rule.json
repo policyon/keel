@@ -1,0 +1,40 @@
+{
+  "name": "a-config-override-cannot-carry-a-keel-restore-past-the-rule",
+  "direction": "block",
+  "description": "BL2/T318 retry, the same bypass in its second spelling. `git -c <name>=<value>` also consumes a separate token, so the pre-fix finder read `a=b` as the subcommand and allowed a `restore` of the observation queue outright - and `-c` is the shape a delegate reaches for most readily, since it is how one silences a hook or a hint. Note that the value CONTAINS an `=`: that is not what saves it, because `-c` itself is what advances past the token. Verified against the pre-fix code: it exited 0.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git -c core.hooksPath=/dev/null restore .keel/queue/keel-observations.jsonl"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "KEEL RECORD RESTORE",
+    "\"permissionDecision\": \"deny\"",
+    "(Guardrail: keel-restore.)"
+  ],
+  "expect_stderr_contains": [
+    "KEEL RECORD RESTORE"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "\"gate\": \"keel_restore\""
+  ]
+}

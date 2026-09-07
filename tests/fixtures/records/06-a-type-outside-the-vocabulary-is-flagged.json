@@ -1,0 +1,16 @@
+{
+  "name": "a-type-outside-the-vocabulary-is-flagged",
+  "direction": "flag",
+  "description": "free text in type: fails; the vocabulary is closed on purpose",
+  "today": "2026-08-01",
+  "records": {
+    "knowledge/odd-type.md": "---\nname: odd-type\ndescription: A record claiming a type nothing in keel understands.\ntype: memo\ngenerated: { by: \"machine:executor\", at: \"2026-08-01\" }\nverified: []\nstale_after: 2027-01-01\n---\n\nBody.\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "unknown_type"
+  ],
+  "expect_absent_rules": [
+    "missing_type"
+  ]
+}

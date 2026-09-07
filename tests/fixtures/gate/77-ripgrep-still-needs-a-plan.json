@@ -1,0 +1,30 @@
+{
+  "name": "ripgrep-still-needs-a-plan",
+  "direction": "block",
+  "description": "The same class as git, on a smaller surface: RIPGREP_CONFIG_PATH names a file of flags ripgrep applies to every invocation, and '--pre <program>' in that file runs a program per searched file. grep stays on the list because no grep flag runs a program at all.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "rg -n tier .keel/keel-policy.md"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN GATE",
+    "\"permissionDecision\": \"deny\"",
+    "keel-plan-$SESS8.md"
+  ],
+  "expect_stderr_contains": [
+    "PLAN GATE"
+  ]
+}

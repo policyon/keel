@@ -1,0 +1,28 @@
+{
+  "name": "powershell-env-read-allowed",
+  "direction": "allow",
+  "description": "False-positive guard: reading $env:KEEL_OVERRIDE is not assigning to it.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "PowerShell",
+    "tool_input": {
+      "command": "Write-Output \"override=$env:KEEL_OVERRIDE\""
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

@@ -1,0 +1,40 @@
+{
+  "name": "the-exact-t314-command-shape-denies",
+  "direction": "block",
+  "description": "BL2/T318. The exact command shape a delegated executor ran on 2026-08-25 to 'tidy' files outside its writable scope, discarding every uncommitted append to the audit log, the observation queue and the session ledger with no deny and no record. `git checkout -- <paths>` names three .keel/ targets after a `--` pathspec marker, so this is the write shape regardless of the branch/path ambiguity ordinary `checkout` carries, and it is refused before it can touch disk. A fresh plan is on file, reproducing the real incident's shape exactly - the pre-fix gate ALLOWED this outright (plan gate satisfied, nothing else asked); only this rule's own presence turns it into a refusal.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git checkout -- .keel/audit/keel-audit.jsonl .keel/queue/keel-observations.jsonl .keel/plans/keel-plan-c62332f5.md"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "KEEL RECORD RESTORE",
+    "\"permissionDecision\": \"deny\"",
+    "(Guardrail: keel-restore.)"
+  ],
+  "expect_stderr_contains": [
+    "KEEL RECORD RESTORE"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "\"gate\": \"keel_restore\""
+  ]
+}

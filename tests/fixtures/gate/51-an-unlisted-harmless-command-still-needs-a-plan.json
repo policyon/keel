@@ -1,0 +1,30 @@
+{
+  "name": "an-unlisted-harmless-command-still-needs-a-plan",
+  "direction": "block",
+  "description": "Closure, proven directly: 'whoami' mutates nothing and matches no mutating verb, redirect or interpreter test, but it is not on the read-only allowlist either, so with no ledger on file it still requires a plan - an allowlist that let an unenumerated word through would not be closed at all.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "whoami"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN GATE",
+    "\"permissionDecision\": \"deny\"",
+    "keel-plan-$SESS8.md"
+  ],
+  "expect_stderr_contains": [
+    "PLAN GATE"
+  ]
+}

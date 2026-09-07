@@ -1,0 +1,37 @@
+{
+  "name": "a-live-list-outside-a-fence-is-still-law",
+  "direction": "allow",
+  "description": "The other direction of the same rule: stripping the fenced example must not swallow the real declaration that follows it, so the live 'workshop:' list still permits its own prefix - with the audit line.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n\n## Policy lock\n\nAn example, for documentation only:\n\n```\nworkshop:\n- docs/\n- everything/\n```\n\nworkshop:\n- hooks/\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "hooks/keel_gate.py",
+      "content": "x = 1\n"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": [
+    "WORKSHOP WRITE"
+  ],
+  "expect_audit_events": [
+    "workshop_write"
+  ],
+  "expect_audit_contains": [
+    "\"workshop\": \"hooks/\""
+  ]
+}

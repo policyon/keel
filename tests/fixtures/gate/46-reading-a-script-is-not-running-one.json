@@ -1,0 +1,24 @@
+{
+  "name": "reading-a-script-is-not-running-one",
+  "direction": "allow",
+  "description": "The opaque-verb test is asked of the command word only, never of a segment's arguments: mentioning a script path is not executing it, so with no ledger on file at all a read-only command that names one is allowed. Testing arguments for script suffixes would deny both of these and re-create the scope mismatch this rule removes.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "cat setup.py && grep -n def scripts/keel.py"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

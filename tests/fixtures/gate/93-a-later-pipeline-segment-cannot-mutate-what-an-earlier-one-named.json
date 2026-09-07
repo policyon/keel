@@ -1,0 +1,46 @@
+{
+  "name": "a-later-pipeline-segment-cannot-mutate-what-an-earlier-one-named",
+  "direction": "block",
+  "description": "The second review finding (2026-08-22, 85%, confirmed): the closed mode judged each segment only against its OWN text, so a pipeline whose FIRST segment named the directory through an allowlisted read - here a plain 'find' - set no taint, and the mutating segment behind the pipe named nothing left to match. 'find ~/.claude/keel -type f | xargs rm -f' therefore deleted every file in keel's user-global directory with no deny, no bypass line and no audit row. A segment that NAMES the directory now taints the rest of the command exactly as a 'cd' into it does, so the 'xargs rm' behind the pipe is refused.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/keel/keel-registry.json",
+      "text": "{\n  \"v\": 1,\n  \"projects\": []\n}\n"
+    }
+  ],
+  "env": {
+    "HOME": "$PROJECT/../userhome",
+    "USERPROFILE": "$PROJECT/../userhome"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "find ~/.claude/keel -type f | xargs rm -f"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "KEEL USER-GLOBAL STATE",
+    "(Guardrail: user-global.)"
+  ],
+  "expect_stderr_contains": [
+    "KEEL USER-GLOBAL STATE"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "\"gate\": \"user_global\""
+  ]
+}

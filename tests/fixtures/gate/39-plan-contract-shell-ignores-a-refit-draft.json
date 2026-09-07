@@ -1,0 +1,28 @@
+{
+  "name": "plan-contract-shell-ignores-a-refit-draft",
+  "direction": "allow",
+  "description": "The scope line holds on the shell side too: a mutating command aimed at a non-ledger file under .keel/plans/ keeps the plain bootstrap allow.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "echo 'handle appropriately, TBD' > .keel/plans/refit-draft-$SESS8.md"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

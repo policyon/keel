@@ -1,0 +1,25 @@
+{
+  "name": "plan-contract-clean-write-allows",
+  "direction": "allow",
+  "description": "A ledger write whose content meets the machine-checkable contract passes the bootstrap carve-out untouched.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": ".keel/plans/keel-plan-$SESS8.md",
+      "content": "# Session plan - $SESS8\n\n## Tasks\n\n- [ ] T1 A task that names its route and its acceptance.\n      Route: standard (keel:executor).\n      Accept: the kernel suite is green.\n- [x] T2 A second task, Route and Accept trailing a sentence. Route: standard (keel:executor). Accept: seven checks green.\n"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

@@ -1,0 +1,37 @@
+{
+  "name": "an-unverifiable-target-denies",
+  "direction": "block",
+  "description": "A target path keel cannot normalise cannot be compared against the lock, so it is refused - everything else about this call (armed, fresh plan, unlocked-looking path) would otherwise allow it.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [x] T1: the thing | AC: it works\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "src/\u0000app.py",
+      "content": "x = 1\n"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "UNVERIFIABLE TARGET",
+    "could not be verified against the policy lock",
+    "src/?app.py"
+  ],
+  "expect_stderr_contains": [
+    "What cannot be resolved is blocked"
+  ],
+  "expect_audit_events": ["gate_block"],
+  "expect_audit_contains": ["\"gate\": \"unverifiable_target\""]
+}

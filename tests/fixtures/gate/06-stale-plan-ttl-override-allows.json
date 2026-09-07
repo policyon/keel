@@ -1,0 +1,31 @@
+{
+  "name": "stale-plan-ttl-override-allows",
+  "direction": "allow",
+  "description": "KEEL_PLAN_TTL_MIN is user-set: widening it revives the same stale ledger.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n",
+      "age_minutes": 600
+    }
+  ],
+  "env": {
+    "KEEL_PLAN_TTL_MIN": "100000"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "src/app.py"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

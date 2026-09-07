@@ -1,0 +1,28 @@
+{
+  "name": "allows-tilde-background-ack-slow-return",
+  "direction": "allow",
+  "description": "T348: the close half's own background:true is trusted over the elapsed-time guess - a background acknowledgment that took 19s to arrive (over BG_LAUNCH_MS) is still an ack, not a close, so the launch stays open and [~] is not stale. THE DEFECT this fixture reproduces: before T348 this same pair blocked, because the elapsed-time-only rule misread a slow background ack as a finished foreground return.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [~] T1: delegated to executor | AC: it works\n"
+    },
+    {
+      "path": ".keel/audit/keel-audit.jsonl",
+      "text": "{\"v\": 1, \"ts\": \"$TS(-319)\", \"event\": \"handoff_start\", \"session\": \"$SESSION\", \"tool_use_id\": \"tu_bgack_1\", \"subagent_type\": \"executor\", \"description\": \"T1\"}\n{\"v\": 1, \"ts\": \"$TS(-300)\", \"event\": \"handoff_end\", \"session\": \"$SESSION\", \"tool_use_id\": \"tu_bgack_1\", \"agent_id\": \"ag_bgack_1\", \"subagent_type\": \"executor\", \"description\": \"T1\", \"background\": true}\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "Stop"
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

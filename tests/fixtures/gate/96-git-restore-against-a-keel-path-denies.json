@@ -1,0 +1,40 @@
+{
+  "name": "git-restore-against-a-keel-path-denies",
+  "direction": "block",
+  "description": "`git restore` is unambiguously a pathspec command - no branch/path guess ever applies to it - so a bare operand naming .keel/ is enough, with no `--` needed at all. A fresh plan is on file, so a pre-fix gate would have allowed this outright; only this rule's own presence refuses it.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git restore .keel/audit/keel-audit.jsonl"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "KEEL RECORD RESTORE",
+    "\"permissionDecision\": \"deny\"",
+    "(Guardrail: keel-restore.)"
+  ],
+  "expect_stderr_contains": [
+    "KEEL RECORD RESTORE"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "\"gate\": \"keel_restore\""
+  ]
+}

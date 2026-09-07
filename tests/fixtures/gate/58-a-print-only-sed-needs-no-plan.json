@@ -1,0 +1,24 @@
+{
+  "name": "a-print-only-sed-needs-no-plan",
+  "direction": "allow",
+  "description": "sed prints or edits depending on its flags. This is the print form - a quiet flag, no other flag, and a bare print address - so it is a read and needs no ledger.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "sed -n '1,5p' notes.md"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

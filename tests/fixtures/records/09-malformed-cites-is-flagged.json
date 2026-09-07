@@ -1,0 +1,16 @@
+{
+  "name": "malformed-cites-is-flagged",
+  "direction": "flag",
+  "description": "shape is objective, so shape is an error: an entry with no version",
+  "today": "2026-08-01",
+  "records": {
+    "knowledge/half-pinned.md": "---\nname: half-pinned\ndescription: A record pinning a source without saying which version it read.\ntype: knowledge\ngenerated: { by: \"machine:executor\", at: \"2026-08-01\" }\nverified: []\nstale_after: 2027-01-01\ncites:\n  - { source: \"neighbour/.claude-plugin/plugin.json\", at: \"2026-08-01\" }\n---\n\nBody.\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "bad_cites"
+  ],
+  "expect_absent_rules": [
+    "cites_drift"
+  ]
+}

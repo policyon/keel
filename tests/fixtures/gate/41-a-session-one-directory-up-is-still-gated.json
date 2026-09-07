@@ -1,0 +1,34 @@
+{
+  "name": "a-session-one-directory-up-is-still-gated",
+  "direction": "block",
+  "description": "The session stands one directory ABOVE the armed project and names a target inside it by absolute path. Arming is resolved from the target upward, so the project's own tier decides and the project's own ledger is the one demanded - before T178 this read as unarmed and was allowed with no gate at all.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT/..",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "$PROJECT/src/app.py",
+      "content": "x = 1\n"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN GATE",
+    "GOVERNING PROJECT",
+    "\"permissionDecision\": \"deny\"",
+    "keel-plan-$SESS8.md"
+  ],
+  "expect_stderr_contains": [
+    "GOVERNING PROJECT"
+  ],
+  "expect_audit_events": ["gate_block"],
+  "expect_audit_contains": ["\"session_cwd\": \"..\""]
+}

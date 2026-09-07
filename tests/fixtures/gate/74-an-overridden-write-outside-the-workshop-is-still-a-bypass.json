@@ -1,0 +1,37 @@
+{
+  "name": "an-overridden-write-outside-the-workshop-is-still-a-bypass",
+  "direction": "allow",
+  "description": "The other half of the same composition: a target no workshop covers keeps gate_bypass as its event, so the switch's own accounting is unchanged by the workshop rule.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n\n## Policy lock\n\nworkshop:\n- hooks/\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    }
+  ],
+  "env": {
+    "KEEL_OVERRIDE": "on"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": ".keel/keel-policy.md",
+      "content": "x = 1\n"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": [],
+  "expect_audit_events": [
+    "gate_bypass"
+  ],
+  "expect_audit_contains": [
+    "\"switch\": \"KEEL_OVERRIDE\""
+  ]
+}

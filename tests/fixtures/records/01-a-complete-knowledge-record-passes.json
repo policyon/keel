@@ -1,0 +1,16 @@
+{
+  "name": "a-complete-knowledge-record-passes",
+  "direction": "pass",
+  "description": "every governance field present and well formed: nothing to say about it",
+  "today": "2026-08-01",
+  "records": {
+    "knowledge/keel-hook-launch.md": "---\nname: keel-hook-launch\ndescription: How keel launches a hook on all three operating systems.\ntype: knowledge\nstatus: ratified\ngenerated: { by: \"machine:executor-deep\", at: \"2026-08-01\" }\nverified:\n  - { by: \"human:operator\", at: \"2026-08-01\" }\nstale_after: 2027-08-01\ncites: []\n---\n\nOne launcher, one bootstrap string, one interpreter probe.\n"
+  },
+  "expect_exit": 0,
+  "expect_rules": [],
+  "expect_absent_rules": [
+    "missing_name",
+    "expired",
+    "bad_cites"
+  ]
+}

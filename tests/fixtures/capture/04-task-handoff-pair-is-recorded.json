@@ -1,0 +1,44 @@
+{
+  "name": "task-handoff-pair-is-recorded",
+  "direction": "record",
+  "description": "PreToolUse then PostToolUse on Task write the open and close halves of one delegation",
+  "files": [
+    {"path": ".keel/keel-policy.md", "text": "---\ntier: 1\n---\n"}
+  ],
+  "invocations": [
+    {
+      "sub": "capture",
+      "stdin": {
+        "hook_event_name": "PreToolUse",
+        "tool_name": "Task",
+        "tool_use_id": "toolu_01",
+        "tool_input": {
+          "subagent_type": "executor",
+          "description": "T3: add the redaction module",
+          "prompt": "TASK T3 - add the redaction module in hooks/keel_redact.py"
+        },
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    },
+    {
+      "sub": "capture",
+      "stdin": {
+        "hook_event_name": "PostToolUse",
+        "tool_name": "Task",
+        "tool_use_id": "toolu_01",
+        "tool_input": {
+          "subagent_type": "executor",
+          "description": "T3: add the redaction module",
+          "prompt": "TASK T3 - add the redaction module in hooks/keel_redact.py"
+        },
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    }
+  ],
+  "expect_exit": 0,
+  "expect_stdout_empty": true,
+  "expect_events": ["handoff_start", "handoff_end"],
+  "expect_audit_contains": ["\"subagent_type\": \"executor\"", "\"tool_use_id\": \"toolu_01\"", "T3: add the redaction module"]
+}

@@ -1,0 +1,29 @@
+{
+  "name": "a-command-naming-no-locked-path-records-nothing",
+  "direction": "allow",
+  "description": "E1's stated limit, pinned as a test so it is a decision rather than an oversight: an interpreter one-liner that names nothing the lock protects is silent in both worlds, because both are TEXT tests over the protected set. The same is true of `tar -xf payload.tar`, which can write anywhere and names nothing - BL11 records it as the honest limit no path scanner closes. If this ever starts recording, the predicate has stopped keying on the protected set and every command in the repository will be on the log",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "python -c \"open('notes.txt','w').write('x')\""
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": [],
+  "expect_audit_events": [],
+  "expect_audit_events_absent": ["lock_unclassifiable"]
+}

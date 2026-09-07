@@ -1,0 +1,25 @@
+{
+  "name": "a-target-outside-every-project-stays-unarmed",
+  "direction": "allow",
+  "description": "The no-widening direction of the fixture beside this one, and the same session: standing one directory above an armed project, writing to a file that is NOT inside it. No project governs the target and none governs the session's directory, so keel is unarmed here exactly as it was - resolving arming from the target must not arm what no arming file covers.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT/..",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "$PROJECT/../loose/note.txt",
+      "content": "x\n"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

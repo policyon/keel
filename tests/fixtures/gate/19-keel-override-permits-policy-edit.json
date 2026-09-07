@@ -1,0 +1,32 @@
+{
+  "name": "keel-override-permits-policy-edit",
+  "direction": "allow",
+  "description": "User-only kill switch: KEEL_OVERRIDE=on suspends the policy lock, and every use of the suspended lock lands on the audit log.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "env": {
+    "KEEL_OVERRIDE": "on"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": ".keel/keel-policy.md"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": [],
+  "expect_audit_events": ["gate_bypass"],
+  "expect_audit_contains": ["\"gate\": \"policy_lock\"", "\"switch\": \"KEEL_OVERRIDE\""]
+}

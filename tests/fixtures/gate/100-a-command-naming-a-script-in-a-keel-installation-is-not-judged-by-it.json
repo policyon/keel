@@ -1,0 +1,36 @@
+{
+  "name": "a-command-naming-a-script-in-a-keel-installation-is-not-judged-by-it",
+  "direction": "allow",
+  "description": "T506/BL57, the owner's case end to end: a session in a project that has NOT adopted keel runs keel's own CLI out of the installed tree - the documented first step of laying keel. The installation is a whole copy of this repository, armed at tier 2 by the .keel/keel-policy.md an install carries, and before this guard it governed the command and refused it with 'no fresh plan for THIS session', naming the plugin cache as the governing project and a ledger inside it as the remedy. An installation is never a governing project, so nothing governs this command and it runs. HOME and USERPROFILE point at a throwaway directory inside the fixture's own temporary tree, so the real plugin cache is never read.",
+  "files": [
+    {
+      "path": "$PROJECT/../userhome/.claude/plugins/cache/policyon/keel/0.6.0/.keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - the record an install copies\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/plugins/cache/policyon/keel/0.6.0/.claude-plugin/plugin.json",
+      "text": "{\n  \"name\": \"keel\",\n  \"version\": \"0.6.0\"\n}\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/plugins/cache/policyon/keel/0.6.0/scripts/keel.py",
+      "text": "# the installed CLI\n"
+    }
+  ],
+  "env": {
+    "HOME": "$PROJECT/../userhome",
+    "USERPROFILE": "$PROJECT/../userhome"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "python $PROJECT/../userhome/.claude/plugins/cache/policyon/keel/0.6.0/scripts/keel.py survey"
+    }
+  },
+  "expect_exit": 0,
+  "expect_audit_events_absent": [
+    "gate_block"
+  ]
+}

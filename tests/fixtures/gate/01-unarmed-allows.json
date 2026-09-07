@@ -1,0 +1,19 @@
+{
+  "name": "unarmed-allows",
+  "direction": "allow",
+  "description": "No .keel/keel-policy.md: keel is registered but disarmed, so nothing is gated (R25).",
+  "files": [],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "src/app.py"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

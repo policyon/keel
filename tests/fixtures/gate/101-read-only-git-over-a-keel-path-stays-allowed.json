@@ -1,0 +1,28 @@
+{
+  "name": "read-only-git-over-a-keel-path-stays-allowed",
+  "direction": "allow",
+  "description": "`status`, `diff`, `log`, `show`, `ls-files`, `grep` and `stash list` are none of the four restore-semantics subcommands, so this rule never asks them anything about .keel/ - they still face rule 2's own plan gate exactly as before (fixtures 56/78), which the fresh plan on file here satisfies.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git status -- .keel/audit/keel-audit.jsonl && git diff -- .keel/queue/keel-observations.jsonl && git log -- .keel/plans/keel-plan-$SESS8.md && git show HEAD:.keel/audit/keel-audit.jsonl && git ls-files .keel/ && git grep -n tier -- .keel/keel-policy.md && git stash list"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

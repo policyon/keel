@@ -1,0 +1,30 @@
+{
+  "name": "a-mutating-git-subcommand-still-needs-a-plan",
+  "direction": "block",
+  "description": "The git subcommand split, write side: 'commit' is not on the read-only allowlist even though 'git' names a version-control tool that is often read-only, so with no ledger on file this still requires a plan - settling the git-commit question the mutation heuristic left open.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git commit -am \"wip\""
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN GATE",
+    "\"permissionDecision\": \"deny\"",
+    "keel-plan-$SESS8.md"
+  ],
+  "expect_stderr_contains": [
+    "PLAN GATE"
+  ]
+}

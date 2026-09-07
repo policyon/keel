@@ -1,0 +1,24 @@
+{
+  "name": "allows-terminal-ledger",
+  "direction": "allow",
+  "description": "[x] done, [!] blocked with a reason, [?] needs a decision - all terminal.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [x] T1: done | AC: green\n- [!] T2: blocked, no credentials | AC: n/a\n- [?] T3: needs the user's decision | AC: n/a\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "Stop"
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

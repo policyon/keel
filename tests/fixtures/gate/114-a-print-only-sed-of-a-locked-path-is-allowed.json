@@ -1,0 +1,32 @@
+{
+  "name": "a-print-only-sed-of-a-locked-path-is-allowed",
+  "direction": "allow",
+  "description": "T513/BL54 end to end, through the launcher and the exit code an in-process check cannot see: a sed that is PROVABLY a print names the kernel file and runs, where until 2026-09-06 it was refused because sed sits on the mutating-verb list whatever its flags. The lock now refuses a mutation rather than a mention. What this fixture does NOT claim: that any sed is allowed - fixture 115 beside it is the same command with -i, still refused - nor that the mention stopped counting, which fixture 108's redirect keeps pinned",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "sed -n '1,20p' hooks/keel_gate.py"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": [],
+  "expect_audit_events": [],
+  "expect_audit_events_absent": [
+    "gate_block",
+    "lock_unclassifiable"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "name": "a-write-into-an-installations-kernel-is-refused",
+  "direction": "block",
+  "description": "T506 retry: an installation loses its POLICY AUTHORITY (fixture 100 - its shipped arming file may not judge an adopter) and keeps the protection of its OWN KERNEL. The session's project is armed AND carries a fresh ledger on purpose, so nothing else can be answering: without this rule the write would fall through to the generic plan allow and the session would rewrite the very hooks binding it. Refused under its own name, gate 'installed_kernel', by no project and for none. HOME and USERPROFILE point at a throwaway directory inside the fixture's own temporary tree, so the real plugin cache is never read or written.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/plugins/cache/policyon/keel/0.6.0/.keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - the record an install copies\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/plugins/cache/policyon/keel/0.6.0/hooks/keel_gate.py",
+      "text": "# the installed gate\n"
+    }
+  ],
+  "env": {
+    "HOME": "$PROJECT/../userhome",
+    "USERPROFILE": "$PROJECT/../userhome"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "$PROJECT/../userhome/.claude/plugins/cache/policyon/keel/0.6.0/hooks/keel_gate.py",
+      "content": "# rewritten by the session it binds\n"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "KEEL INSTALLATION KERNEL",
+    "(Guardrail: installed-kernel.)"
+  ],
+  "expect_stderr_contains": [
+    "KEEL INSTALLATION KERNEL"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "\"gate\": \"installed_kernel\""
+  ]
+}

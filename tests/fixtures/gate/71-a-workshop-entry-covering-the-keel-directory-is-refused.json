@@ -1,0 +1,38 @@
+{
+  "name": "a-workshop-entry-covering-the-keel-directory-is-refused",
+  "direction": "block",
+  "description": "Containment counts as naming: '.keel/' would cover the arming file and the settings file beneath it, so the entry is refused with its reason and the lock stands.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n\n## Policy lock\n\nworkshop:\n- .keel/\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": ".keel/settings.json",
+      "content": "x = 1\n"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "POLICY LOCK",
+    "\"permissionDecision\": \"deny\""
+  ],
+  "expect_stderr_contains": [
+    "is IGNORED as if it had not been declared",
+    "POLICY LOCK"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ]
+}

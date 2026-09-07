@@ -1,0 +1,16 @@
+{
+  "name": "an-expired-stale-after-is-flagged",
+  "direction": "flag",
+  "description": "the headline check: a record that still exists but has rotted",
+  "today": "2026-08-01",
+  "records": {
+    "knowledge/rotted.md": "---\nname: rotted\ndescription: A record whose own freshness date passed a year ago.\ntype: knowledge\ngenerated: { by: \"machine:executor\", at: \"2025-07-01\" }\nverified: []\nstale_after: 2025-08-01\n---\n\nBody.\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "expired"
+  ],
+  "expect_absent_rules": [
+    "bad_stale_after"
+  ]
+}

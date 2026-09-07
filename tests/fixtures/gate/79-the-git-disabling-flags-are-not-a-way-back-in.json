@@ -1,0 +1,30 @@
+{
+  "name": "the-git-disabling-flags-are-not-a-way-back-in",
+  "direction": "block",
+  "description": "The middle path was considered and rejected: even spelled with '--no-ext-diff --no-textconv', git is not re-admitted, because the safety of that spelling would depend on enumerating every future config-chosen program git grows - the same unclosable set the allowlist exists to avoid.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git diff --no-ext-diff --no-textconv"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN GATE",
+    "\"permissionDecision\": \"deny\"",
+    "keel-plan-$SESS8.md"
+  ],
+  "expect_stderr_contains": [
+    "PLAN GATE"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "a-reviewer-with-no-floor-line-is-flagged",
+  "direction": "flag",
+  "description": "a floor stated in prose is a suggestion; the section must carry the one line a checker reads",
+  "agents": {
+    "reviewer-fixture.md": "---\nname: reviewer-fixture\ndescription: Use after an executor reports done, to check the fixture change against the house contract.\ntools: Read, Grep, Glob\nmodel: sonnet\n---\n\nYou are a fixture reviewer.\n\n## Scope\n\nOne question: does the fixture hold?\n\n## Confidence floor\n\nThe floor is eighty percent, more or less.\n\n## What NOT to flag\n\n- Style, naming, formatting.\n\n## Verdict\n\nSTATUS: pass | fail\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "floor_line"
+  ],
+  "expect_absent_rules": [
+    "heading_missing",
+    "reviewer_tools"
+  ]
+}

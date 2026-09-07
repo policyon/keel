@@ -1,0 +1,6 @@
+{
+  "builtAgainst": {
+    "claude-code": "2.1.214"
+  },
+  "_purpose": "R31 build-time pins — moved out of plugin.json because strict validation warns on unknown fields; keel survey reads this file"
+}

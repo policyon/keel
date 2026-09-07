@@ -1,0 +1,28 @@
+{
+  "name": "a-global-option-in-front-of-a-read-only-git-command-is-allowed",
+  "direction": "allow",
+  "description": "BL2/T318 retry. The other precision half: after `-C` and its value are skipped, `status` is what the subcommand test sees, and `status` is none of the four restore verbs - so this rule never asks it anything, exactly as fixture 101 pins for the bare read-only shapes. Together with 105 this proves the fix skips the option's VALUE and not the SUBCOMMAND: a walker that ate one token too many would land on `.keel/audit/keel-audit.jsonl` here and on nothing at all in `git -C /tmp status`, and the fail-closed look-ahead would then be reachable by any read. Like 105 it passes against the pre-fix code too; it guards the direction that code was accidentally right about.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git -C /tmp status && git -C /tmp diff -- .keel/audit/keel-audit.jsonl && git --no-pager log -- .keel/queue/keel-observations.jsonl"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

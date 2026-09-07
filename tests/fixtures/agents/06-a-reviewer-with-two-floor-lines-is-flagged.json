@@ -1,0 +1,16 @@
+{
+  "name": "a-reviewer-with-two-floor-lines-is-flagged",
+  "direction": "flag",
+  "description": "two floors is no floor: a checker reading the value cannot know which one binds",
+  "agents": {
+    "reviewer-fixture.md": "---\nname: reviewer-fixture\ndescription: Use after an executor reports done, to check the fixture change against the house contract.\ntools: Read, Grep, Glob\nmodel: sonnet\n---\n\nYou are a fixture reviewer.\n\n## Scope\n\nOne question: does the fixture hold?\n\n## Confidence floor\n\nConfidence floor: 80%\n\nConfidence floor: 90%\n\n## What NOT to flag\n\n- Style, naming, formatting.\n\n## Verdict\n\nSTATUS: pass | fail\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "floor_line"
+  ],
+  "expect_absent_rules": [
+    "heading_missing",
+    "reviewer_tools"
+  ]
+}

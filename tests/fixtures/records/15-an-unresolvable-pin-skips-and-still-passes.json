@@ -1,0 +1,16 @@
+{
+  "name": "an-unresolvable-pin-skips-and-still-passes",
+  "direction": "pass",
+  "description": "a source absent here is skipped, so checks never depend on a neighbour",
+  "today": "2026-08-01",
+  "records": {
+    "knowledge/pinned-to-nothing-here.md": "---\nname: pinned-to-nothing-here\ndescription: A record pinning a source not installed on this machine.\ntype: knowledge\ngenerated: { by: \"machine:executor\", at: \"2026-08-01\" }\nverified: []\nstale_after: 2027-01-01\ncites:\n  - { source: \"absent/.claude-plugin/plugin.json\", version: \"1.2.3\", at: \"2026-08-01\" }\n---\n\nBody.\n"
+  },
+  "expect_exit": 0,
+  "expect_rules": [
+    "cites_unverifiable"
+  ],
+  "expect_absent_rules": [
+    "cites_drift"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "name": "blocks-tilde-with-another-sessions-handoff",
+  "direction": "block",
+  "description": "Session isolation: another session's open hand-off does not unlock this session's [~].",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [~] T1: delegated to executor | AC: it works\n"
+    },
+    {
+      "path": ".keel/audit/keel-audit.jsonl",
+      "text": "{\"v\": 1, \"ts\": \"$TS(-30)\", \"event\": \"handoff_start\", \"session\": \"other-session-9999\", \"tool_use_id\": \"tu_other_1\", \"subagent_type\": \"executor\", \"description\": \"T1\"}\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "Stop"
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "STOP BLOCKED",
+    "no active delegation"
+  ],
+  "expect_stderr_contains": []
+}

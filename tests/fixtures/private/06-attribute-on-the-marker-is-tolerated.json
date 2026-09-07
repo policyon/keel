@@ -1,0 +1,7 @@
+{
+  "name": "attribute-on-the-marker-is-tolerated",
+  "description": "an attribute on the opening tag is ignored; what matters is where the region starts",
+  "input": "key rotated <keel-private reason=\"credential\">AKIA-secret-value</keel-private> on tuesday",
+  "expect_output": "key rotated  on tuesday",
+  "expect_warning": false
+}

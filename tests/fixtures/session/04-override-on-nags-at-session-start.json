@@ -1,0 +1,30 @@
+{
+  "name": "override-on-nags-at-session-start",
+  "direction": "record",
+  "description": "while the user-set override is active the injected context carries one line saying the lock is suspended and how to restore it",
+  "files": [
+    {"path": ".keel/keel-policy.md", "text": "---\ntier: 2\n---\n"}
+  ],
+  "env": {
+    "KEEL_OVERRIDE": "on"
+  },
+  "invocations": [
+    {
+      "sub": "session",
+      "stdin": {
+        "hook_event_name": "SessionStart",
+        "source": "startup",
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    }
+  ],
+  "expect_exit": 0,
+  "expect_events": ["session_start"],
+  "expect_stdout_contains": [
+    ".keel/plans/keel-plan-$SESS8.md",
+    "POLICY LOCK SUSPENDED",
+    "Restore the lock by clearing KEEL_OVERRIDE"
+  ],
+  "expect_audit_absent": ["$USERNAME"]
+}

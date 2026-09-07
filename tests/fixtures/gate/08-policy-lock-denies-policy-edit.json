@@ -1,0 +1,33 @@
+{
+  "name": "policy-lock-denies-policy-edit",
+  "direction": "block",
+  "description": "The model may not edit the rules that bind it, fresh plan or not.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1: the thing | AC: it works\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": ".keel/keel-policy.md"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "POLICY LOCK",
+    "\"permissionDecision\": \"deny\"",
+    "KEEL_OVERRIDE=on",
+    "NEXT STEP: policy changes go through the refit skill"
+  ],
+  "expect_stderr_contains": []
+}

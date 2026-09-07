@@ -1,0 +1,31 @@
+{
+  "name": "reading-keels-user-global-state-is-not-refused",
+  "direction": "allow",
+  "description": "T231 is about WRITES: a read of the same file by the same shell is not refused, so the board, the doctor and a curious session can all still look. This project carries NO ledger on purpose - the allow therefore comes from the read-only allowlist, and a regression that turned this rule into a blanket ban on naming the directory would show up here as a block rather than as silence.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/keel/keel-registry.json",
+      "text": "{\n  \"v\": 1,\n  \"projects\": []\n}\n"
+    }
+  ],
+  "env": {
+    "HOME": "$PROJECT/../userhome",
+    "USERPROFILE": "$PROJECT/../userhome"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "cat ~/.claude/keel/keel-registry.json"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

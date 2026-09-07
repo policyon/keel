@@ -1,0 +1,15 @@
+{
+  "name": "a-decision-record-passes",
+  "direction": "pass",
+  "description": "a ratified decision with a named verifier and no stale_after",
+  "today": "2026-08-01",
+  "records": {
+    "decisions/2026-08-01-arm-keel-on-keel.md": "---\nname: 2026-08-01-arm-keel-on-keel\ndescription: keel arms its own repository at tier 2 at the Phase 1 exit gate.\ntype: decision\nstatus: ratified\ngenerated: { by: \"machine:executor-deep\", at: \"2026-08-01\" }\nverified:\n  - { by: \"human:operator\", at: \"2026-08-01\" }\n---\n\nD6: keel is developed under keel.\n"
+  },
+  "expect_exit": 0,
+  "expect_rules": [],
+  "expect_absent_rules": [
+    "decision_with_stale_after",
+    "ratified_unverified"
+  ]
+}

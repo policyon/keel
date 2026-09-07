@@ -1,0 +1,27 @@
+{
+  "name": "lowercase-bash-tool-denies",
+  "direction": "block",
+  "description": "Case variant of the tool name (R1, convention 3): 'bash' maps to pre_exec exactly like 'Bash'.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "bash",
+    "tool_input": {
+      "command": "python -m pytest"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN GATE",
+    "\"permissionDecision\": \"deny\""
+  ],
+  "expect_stderr_contains": []
+}

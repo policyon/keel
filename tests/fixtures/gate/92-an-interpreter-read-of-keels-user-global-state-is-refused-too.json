@@ -1,0 +1,48 @@
+{
+  "name": "an-interpreter-read-of-keels-user-global-state-is-refused-too",
+  "direction": "block",
+  "description": "T231's retry pins its COST as well as its fix, so nobody meets this refusal and thinks it a bug. The one-liner only READS the registry - but the read lives inside a string keel cannot execute, and a matcher that could tell this one from a write could be talked into blessing the write. The closed allowlist refuses both, and the message says so and names the override. Fixture 89 is the other half: a plain cat of the same file still runs.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    },
+    {
+      "path": "$PROJECT/../userhome/.claude/keel/keel-registry.json",
+      "text": "{\n  \"v\": 1,\n  \"projects\": []\n}\n"
+    }
+  ],
+  "env": {
+    "HOME": "$PROJECT/../userhome",
+    "USERPROFILE": "$PROJECT/../userhome"
+  },
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "python3 -c \"import os; print(open(os.path.expanduser('~/.claude/keel/keel-registry.json')).read())\""
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "KEEL USER-GLOBAL STATE",
+    "keel cannot tell a read from a write inside an interpreter one-liner",
+    "KEEL_OVERRIDE=on",
+    "(Guardrail: user-global.)"
+  ],
+  "expect_stderr_contains": [
+    "KEEL USER-GLOBAL STATE"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "\"gate\": \"user_global\""
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "a-workshop-write-is-allowed-and-audited",
+  "direction": "allow",
+  "description": "The ratified workshop rule: in a self-hosted repository a write under a declared prefix turns the policy-lock deny into an allow, and the allow is loud - its own audit kind, naming the prefix that permitted it, plus one line on stderr.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n\n## Policy lock\n\nworkshop:\n- hooks/\n- scripts/\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "hooks/keel_gate.py",
+      "content": "x = 1\n"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": [
+    "WORKSHOP WRITE"
+  ],
+  "expect_audit_events": [
+    "workshop_write"
+  ],
+  "expect_audit_contains": [
+    "\"target\": \"hooks/keel_gate.py\", \"workshop\": \"hooks/\""
+  ]
+}

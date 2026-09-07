@@ -1,0 +1,7 @@
+{
+  "name": "newlines-inside-the-block-are-covered",
+  "description": "a marked region may span lines; the marker is not line-oriented",
+  "input": "before\n<keel-private>line one\nline two\n</keel-private>\nafter",
+  "expect_output": "before\n\nafter",
+  "expect_warning": false
+}

@@ -1,0 +1,16 @@
+{
+  "name": "a-relative-stale-after-is-flagged",
+  "direction": "flag",
+  "description": "prose cannot be compared to a clock; absolute dates only",
+  "today": "2026-08-01",
+  "records": {
+    "knowledge/relative-date.md": "---\nname: relative-date\ndescription: A record whose expiry is prose rather than a date.\ntype: knowledge\ngenerated: { by: \"machine:executor\", at: \"2026-08-01\" }\nverified: []\nstale_after: in six months\n---\n\nBody.\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "bad_stale_after"
+  ],
+  "expect_absent_rules": [
+    "expired"
+  ]
+}

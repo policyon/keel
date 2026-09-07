@@ -1,0 +1,41 @@
+{
+  "name": "plan-contract-powershell-set-content-denies",
+  "direction": "block",
+  "description": "A gate that guards Write but not Set-Content guards nothing: the PowerShell path is refused the same way, on a Windows-separator ledger path.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "PowerShell",
+    "tool_input": {
+      "command": "Set-Content -Path .keel\\plans\\keel-plan-$SESS8.md -Value '- [ ] TBD'"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN CONTRACT",
+    "NEXT STEP:",
+    "Write or Edit tool",
+    "\"permissionDecision\": \"deny\""
+  ],
+  "expect_stderr_contains": [
+    "PLAN CONTRACT"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "plan_contract_shell"
+  ]
+}

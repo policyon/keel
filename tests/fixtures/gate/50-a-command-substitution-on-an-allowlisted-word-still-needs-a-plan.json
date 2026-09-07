@@ -1,0 +1,30 @@
+{
+  "name": "a-command-substitution-on-an-allowlisted-word-still-needs-a-plan",
+  "direction": "block",
+  "description": "A command word on the read-only allowlist is not read-only once its argument runs a command substitution: 'cat' clears the word test, but $(...) runs text this gate is never shown, so with no ledger on file this still requires a plan.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "cat $(echo secret.txt)"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN GATE",
+    "\"permissionDecision\": \"deny\"",
+    "keel-plan-$SESS8.md"
+  ],
+  "expect_stderr_contains": [
+    "PLAN GATE"
+  ]
+}

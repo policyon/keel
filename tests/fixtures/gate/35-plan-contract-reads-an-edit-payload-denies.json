@@ -1,0 +1,42 @@
+{
+  "name": "plan-contract-reads-an-edit-payload-denies",
+  "direction": "block",
+  "description": "An Edit whose substitution turns a clean ledger dirty is refused: the assertion reads the POST-EDIT content, applied in memory, not the file as it stands.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Session plan - $SESS8\n\n## Tasks\n\n- [ ] T1 A task that starts out contract-clean.\n      Route: standard (keel:executor).\n      Accept: the kernel suite is green.\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Edit",
+    "tool_input": {
+      "file_path": ".keel/plans/keel-plan-$SESS8.md",
+      "old_string": "      Accept: the kernel suite is green.\n",
+      "new_string": "      Accept: TBD.\n"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN CONTRACT",
+    "placeholder_phrase",
+    "\"permissionDecision\": \"deny\""
+  ],
+  "expect_stderr_contains": [
+    "PLAN CONTRACT"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "plan_contract"
+  ]
+}

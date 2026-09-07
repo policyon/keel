@@ -1,0 +1,15 @@
+{
+  "name": "a-compliant-reviewer-passes",
+  "direction": "pass",
+  "description": "read-only tools, delegation-grade description, the four headings in order, one floor line, one bullet: nothing to say about it",
+  "agents": {
+    "reviewer-fixture.md": "---\nname: reviewer-fixture\ndescription: Use after an executor reports done, to check the fixture change against the house contract.\ntools: Read, Grep, Glob\nmodel: sonnet\n---\n\nYou are a fixture reviewer.\n\n## Scope\n\nOne question: does the fixture hold?\n\n## Confidence floor\n\nConfidence floor: 80%\n\nA finding below the floor is dropped, not hedged.\n\n## What NOT to flag\n\n- Style, naming, formatting.\n\n## Verdict\n\nSTATUS: pass | fail\n"
+  },
+  "expect_exit": 0,
+  "expect_rules": [],
+  "expect_absent_rules": [
+    "reviewer_tools",
+    "heading_missing",
+    "floor_line"
+  ]
+}

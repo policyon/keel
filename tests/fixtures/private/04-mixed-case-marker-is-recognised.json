@@ -1,0 +1,7 @@
+{
+  "name": "mixed-case-marker-is-recognised",
+  "description": "the open and close tags need not even agree with each other on case",
+  "input": "key rotated <Keel-Private>AKIA-secret-value</keel-PRIVATE> on tuesday",
+  "expect_output": "key rotated  on tuesday",
+  "expect_warning": false
+}

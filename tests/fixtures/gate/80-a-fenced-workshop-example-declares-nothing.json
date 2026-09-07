@@ -1,0 +1,37 @@
+{
+  "name": "a-fenced-workshop-example-declares-nothing",
+  "direction": "block",
+  "description": "The policy parser may not read documentation as law: a 'workshop:' list inside a fenced code block is an EXAMPLE, so the prefix it names is not declared and a write there is refused exactly as if no section existed.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n\n## Policy lock\n\nAn example, for documentation only:\n\n```\nworkshop:\n- hooks/\n- scripts/\n```\n\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "hooks/keel_gate.py",
+      "content": "x = 1\n"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "POLICY LOCK",
+    "\"permissionDecision\": \"deny\""
+  ],
+  "expect_stderr_contains": [
+    "POLICY LOCK"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ]
+}

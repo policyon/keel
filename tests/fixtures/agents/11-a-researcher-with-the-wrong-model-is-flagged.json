@@ -1,0 +1,15 @@
+{
+  "name": "a-researcher-with-the-wrong-model-is-flagged",
+  "direction": "flag",
+  "description": "the routing law assigns researcher to the haiku class; a researcher pinned to another class is drift, not a choice",
+  "agents": {
+    "researcher.md": "---\nname: researcher\ndescription: Use before planning, to scope read-only.\ntools: Read, Grep, Glob\nmodel: opus\n---\n\nBody.\n"
+  },
+  "expect_exit": 1,
+  "expect_rules": [
+    "model_mismatch"
+  ],
+  "expect_absent_rules": [
+    "model_missing"
+  ]
+}

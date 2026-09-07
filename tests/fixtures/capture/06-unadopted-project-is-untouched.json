@@ -1,0 +1,22 @@
+{
+  "name": "unadopted-project-is-untouched",
+  "direction": "silent",
+  "description": "no .keel/ means no adoption: a globally registered observer must leave the project byte-for-byte alone (R25)",
+  "files": [],
+  "invocations": [
+    {
+      "sub": "capture",
+      "stdin": {
+        "hook_event_name": "PostToolUse",
+        "tool_name": "Write",
+        "tool_input": {"file_path": "src/app.py"},
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    }
+  ],
+  "expect_exit": 0,
+  "expect_stdout_empty": true,
+  "expect_no_audit": true,
+  "expect_empty_project": true
+}

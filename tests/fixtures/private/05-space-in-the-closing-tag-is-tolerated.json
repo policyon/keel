@@ -1,0 +1,7 @@
+{
+  "name": "space-in-the-closing-tag-is-tolerated",
+  "description": "a stray space inside the closing tag is a typo, not an unclosed block: the content is still dropped",
+  "input": "key rotated <keel-private>AKIA-secret-value< / keel-private > on tuesday",
+  "expect_output": "key rotated  on tuesday",
+  "expect_warning": false
+}

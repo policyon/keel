@@ -1,0 +1,24 @@
+{
+  "name": "a-piped-read-only-pipeline-needs-no-plan",
+  "direction": "allow",
+  "description": "Every segment must clear the allowlist independently, and here every segment does: the pipe between grep and head neither adds a write nor hides one, so no ledger is required.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "grep -n tier .keel/keel-policy.md | head -5"
+    }
+  },
+  "expect_exit": 0,
+  "expect_stdout_contains": [],
+  "expect_stderr_contains": []
+}

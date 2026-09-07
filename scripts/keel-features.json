@@ -1,0 +1,81 @@
+{
+  "v": 1,
+  "features": {
+    "kernel": {
+      "layer": "core",
+      "components": [
+        "hooks/hooks.json",
+        "hooks/keel_adapter_claude.py",
+        "hooks/keel_capture.py",
+        "hooks/keel_compaction.py",
+        "hooks/keel_events.py",
+        "hooks/keel_faultlog.py",
+        "hooks/keel_features.py",
+        "hooks/keel_gate.py",
+        "hooks/keel_hook.py",
+        "hooks/keel_redact.py",
+        "hooks/keel_session.py",
+        "hooks/keel_stop.py",
+        "scripts/keel.py",
+        "scripts/keel-denied-names.json",
+        "scripts/keel-features.json",
+        "scripts/keel_attest.py",
+        "scripts/keel_checks.py",
+        "scripts/keel_debt.py",
+        "scripts/keel_doctor.py",
+        "scripts/keel_gen_hooks.py",
+        "scripts/keel_leak_check.py",
+        "scripts/keel_plans.py",
+        "scripts/keel_records.py",
+        "scripts/keel_review.py",
+        "scripts/keel_statusline.py",
+        "scripts/keel_survey.py"
+      ],
+      "requires": []
+    },
+    "orchestration": {
+      "layer": "core",
+      "components": [
+        "agents/executor.md",
+        "agents/executor-deep.md",
+        "agents/researcher.md",
+        "skills/castoff/",
+        "skills/lay/",
+        "skills/moor/",
+        "skills/ratify/",
+        "skills/refit/",
+        "skills/sound/",
+        "skills/wave-review/"
+      ],
+      "requires": ["kernel"]
+    },
+    "knowledge": {
+      "layer": "standard",
+      "components": [
+        "skills/log/",
+        "skills/chart/",
+        "scripts/keel_index.py",
+        "scripts/keel_chart.py"
+      ],
+      "requires": ["kernel"]
+    },
+    "review": {
+      "layer": "govern",
+      "components": [
+        "agents/reviewer-altitude.md",
+        "agents/reviewer-correctness.md",
+        "agents/reviewer-security.md",
+        "agents/reviewer-silent-failure.md",
+        "agents/reviewer-tests.md"
+      ],
+      "requires": ["orchestration"]
+    },
+    "viewer": {
+      "layer": "fleet",
+      "components": [
+        "scripts/keel_dashboard.py"
+      ],
+      "requires": ["kernel"]
+    }
+  }
+}

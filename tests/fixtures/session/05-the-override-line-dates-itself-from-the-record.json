@@ -1,0 +1,29 @@
+{
+  "name": "the-override-line-dates-itself-from-the-record",
+  "direction": "record",
+  "description": "the suspended-lock line carries an age clause derived from the audit record rather than from the switch, so an inherited override cannot read as a fresh one; with nothing on record it says so instead of guessing",
+  "files": [
+    {"path": ".keel/keel-policy.md", "text": "---\ntier: 2\n---\n"}
+  ],
+  "env": {
+    "KEEL_OVERRIDE": "on"
+  },
+  "invocations": [
+    {
+      "sub": "session",
+      "stdin": {
+        "hook_event_name": "SessionStart",
+        "source": "startup",
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    }
+  ],
+  "expect_exit": 0,
+  "expect_events": ["session_start"],
+  "expect_stdout_contains": [
+    "POLICY LOCK SUSPENDED",
+    "OVERRIDE AGE: no earlier use of it is on the audit record"
+  ],
+  "expect_audit_absent": ["$USERNAME"]
+}

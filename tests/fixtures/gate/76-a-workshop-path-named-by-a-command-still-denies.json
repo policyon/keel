@@ -1,0 +1,39 @@
+{
+  "name": "a-workshop-path-named-by-a-command-still-denies",
+  "direction": "block",
+  "description": "The workshop rule reaches the WRITE path and nothing else: a shell command names no target the gate can resolve to a prefix with the confidence an allow needs, so with 'hooks/' declared a command that would rewrite a hook is refused exactly as before.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n\n## Policy lock\n\nworkshop:\n- hooks/\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [ ] T1 the thing\n      Route: standard (keel:executor).\n      Accept: it works.\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "Set-Content hooks/keel_gate.py 'x'"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "POLICY LOCK",
+    "\"permissionDecision\": \"deny\""
+  ],
+  "expect_stderr_contains": [
+    "POLICY LOCK"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "policy_lock"
+  ]
+}

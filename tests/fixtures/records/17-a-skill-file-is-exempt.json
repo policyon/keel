@@ -1,0 +1,16 @@
+{
+  "name": "a-skill-file-is-exempt",
+  "direction": "pass",
+  "description": "SKILL.md frontmatter is an external contract; a hit here would be keel's bug",
+  "today": "2026-08-01",
+  "records": {
+    "knowledge/chart/SKILL.md": "---\nname: chart\ndescription: Use when searching keel knowledge.\n---\n\nRouter.\n"
+  },
+  "expect_exit": 0,
+  "expect_rules": [],
+  "expect_absent_rules": [
+    "missing_type",
+    "no_frontmatter"
+  ],
+  "expect_checked": 0
+}

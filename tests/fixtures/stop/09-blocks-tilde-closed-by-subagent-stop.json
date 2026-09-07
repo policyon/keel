@@ -1,0 +1,31 @@
+{
+  "name": "blocks-tilde-closed-by-subagent-stop",
+  "direction": "block",
+  "description": "The delegation reported back BY NAME - the stop carries the agent id the launch's own return recorded - so [~] must now be closed properly.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    },
+    {
+      "path": ".keel/plans/keel-plan-$SESS8.md",
+      "text": "# Plan\n\n- [~] T1: delegated to executor | AC: it works\n"
+    },
+    {
+      "path": ".keel/audit/keel-audit.jsonl",
+      "text": "{\"v\": 1, \"ts\": \"$TS(-300)\", \"event\": \"handoff_start\", \"session\": \"$SESSION\", \"tool_use_id\": \"tu_stop_1\", \"agent_id\": null, \"subagent_type\": \"executor\", \"description\": \"T1\"}\n{\"v\": 1, \"ts\": \"$TS(-299)\", \"event\": \"handoff_end\", \"session\": \"$SESSION\", \"tool_use_id\": \"tu_stop_1\", \"agent_id\": \"ag_1\", \"subagent_type\": \"executor\", \"description\": \"T1\"}\n{\"v\": 1, \"ts\": \"$TS(-60)\", \"event\": \"subagent_stop\", \"session\": \"$SESSION\", \"agent_type\": \"executor\", \"agent_id\": \"ag_1\"}\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "Stop"
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "STOP BLOCKED",
+    "no active delegation"
+  ],
+  "expect_stderr_contains": []
+}

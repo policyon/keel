@@ -1,0 +1,27 @@
+{
+  "name": "no-hold-reads-as-an-explicit-none",
+  "direction": "record",
+  "description": "the other direction: a hold ABSENT from a section that says so. The explicit none-marker this repository's own arming file uses must read as 'none active (explicitly declared)' - a stated fact, never silence, and never a hold literally named '(none active)'",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n\n## Holds\n\nStanding constraints that survive across sessions until the user lifts them.\n\n- *(none active)*\n"
+    }
+  ],
+  "invocations": [
+    {
+      "sub": "session",
+      "stdin": {
+        "hook_event_name": "SessionStart",
+        "source": "startup",
+        "session_id": "$SESSION",
+        "cwd": "$PROJECT"
+      }
+    }
+  ],
+  "expect_exit": 0,
+  "expect_events": ["session_start"],
+  "expect_stdout_contains": [
+    "holds - none active (explicitly declared)"
+  ]
+}

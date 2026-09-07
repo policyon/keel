@@ -1,0 +1,38 @@
+{
+  "name": "plan-contract-missing-identifier-denies",
+  "direction": "block",
+  "description": "A task line with no Tn identifier blocks at the gate even though keel_plans grades it a warning: the blocking set is the gate's law.",
+  "files": [
+    {
+      "path": ".keel/keel-policy.md",
+      "text": "---\ntier: 2\n---\n\n# keel policy - fixture project\n"
+    }
+  ],
+  "env": {},
+  "stdin": {
+    "session_id": "$SESSION",
+    "cwd": "$PROJECT",
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": ".keel/plans/keel-plan-$SESS8.md",
+      "content": "# Session plan - $SESS8\n\n## Tasks\n\n- [ ] A task with no identifier after its checkbox.\n      Route: standard (keel:executor).\n      Accept: the kernel suite is green.\n"
+    }
+  },
+  "expect_exit": 2,
+  "expect_stdout_contains": [
+    "PLAN CONTRACT",
+    "missing_identifier",
+    "NEXT STEP:",
+    "\"permissionDecision\": \"deny\""
+  ],
+  "expect_stderr_contains": [
+    "missing_identifier"
+  ],
+  "expect_audit_events": [
+    "gate_block"
+  ],
+  "expect_audit_contains": [
+    "plan_contract"
+  ]
+}
