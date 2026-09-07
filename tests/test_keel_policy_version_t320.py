@@ -404,8 +404,14 @@ class TestEveryCheckIsWiredIn(unittest.TestCase):
         silent = [
             name
             for name, _ in keel_checks.CHECKS
-            if not re.search(rf"^(?:PASS|FAIL) {re.escape(name)}\b", printed, re.M)
+            if not re.search(rf"^(?:PASS|FAIL|SKIP) {re.escape(name)}\b", printed, re.M)
         ]
+        # SKIP counts as reported: it is a visible dispatch verdict (the
+        # plugin check prints one when the external `claude` binary is
+        # absent, which is every CI runner). What this test refuses is
+        # SILENCE - a registered check main never mentions at all. First
+        # caught live on the 2026-09-07 three-OS run, where PASS|FAIL alone
+        # read the plugin check's honest SKIP as the 2026-09-01 silence.
         self.assertEqual(
             silent,
             [],

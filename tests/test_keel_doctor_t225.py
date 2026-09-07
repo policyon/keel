@@ -828,7 +828,7 @@ class TestHarnessBashResolver(unittest.TestCase):
             with mock.patch.dict(
                 os.environ, {keel_doctor.CLAUDE_CODE_GIT_BASH_PATH_VAR: str(missing)}
             ), mock.patch("keel_doctor.shutil.which", return_value=None), mock.patch.object(
-                keel_doctor.os, "name", "nt"
+                keel_doctor, "_running_on_windows", lambda: True
             ):
                 bash, note = keel_doctor.harness_bash()
         self.assertIsNone(bash)
@@ -852,7 +852,7 @@ class TestHarnessBashResolver(unittest.TestCase):
 
             with mock.patch.dict(os.environ, {}, clear=False), mock.patch(
                 "keel_doctor.shutil.which", side_effect=fake_which
-            ), mock.patch.object(keel_doctor.os, "name", "nt"):
+            ), mock.patch.object(keel_doctor, "_running_on_windows", lambda: True):
                 os.environ.pop(keel_doctor.CLAUDE_CODE_GIT_BASH_PATH_VAR, None)
                 bash, note = keel_doctor.harness_bash()
         self.assertEqual(bash, str(derived_bash))
@@ -904,7 +904,7 @@ class TestHarnessBashResolver(unittest.TestCase):
 
         with mock.patch.dict(os.environ, {}, clear=False), mock.patch(
             "keel_doctor.shutil.which", side_effect=fake_which
-        ), mock.patch.object(keel_doctor.os, "name", "nt"):
+        ), mock.patch.object(keel_doctor, "_running_on_windows", lambda: True):
             os.environ.pop(keel_doctor.CLAUDE_CODE_GIT_BASH_PATH_VAR, None)
             bash, note = keel_doctor.harness_bash()
         self.assertEqual(bash, path_bash)
@@ -913,7 +913,7 @@ class TestHarnessBashResolver(unittest.TestCase):
     def test_nothing_resolves_at_all(self) -> None:
         with mock.patch.dict(os.environ, {}, clear=False), mock.patch(
             "keel_doctor.shutil.which", return_value=None
-        ), mock.patch.object(keel_doctor.os, "name", "nt"):
+        ), mock.patch.object(keel_doctor, "_running_on_windows", lambda: True):
             os.environ.pop(keel_doctor.CLAUDE_CODE_GIT_BASH_PATH_VAR, None)
             bash, note = keel_doctor.harness_bash()
         self.assertIsNone(bash)

@@ -290,6 +290,17 @@ BASH_USABLE_TIMEOUT_SECONDS = 5.0
 BASH_USABLE_MARKER = "keel-doctor-bash-ok"
 
 
+def _running_on_windows() -> bool:
+    """The platform question, as a seam. ``pathlib.Path`` chooses its flavour
+    from ``os.name`` at construction time, so a test that patches the shared
+    ``os`` module's ``name`` to fake Windows breaks every ``Path()`` in the
+    process with ``NotImplementedError: cannot instantiate 'WindowsPath'`` —
+    measured on the first live three-OS CI run, 2026-09-07, where four such
+    patches errored on Linux and macOS. Tests patch THIS function instead;
+    production behaviour is identical."""
+    return os.name == "nt"
+
+
 def derive_git_bash(git_exe: Path, windows: bool) -> Path | None:
     """The Git-for-Windows ``bash`` that ships beside ``git_exe``, or ``None``.
 
@@ -347,7 +358,7 @@ def harness_bash() -> tuple[str | None, str]:
         if path_first and os.path.abspath(override) != os.path.abspath(path_first):
             note += f" - differs from PATH-first bash {redact(path_first)}"
         return override, note
-    if os.name == "nt":
+    if _running_on_windows():
         git_exe = shutil.which("git")
         if git_exe:
             derived = derive_git_bash(Path(git_exe), windows=True)
