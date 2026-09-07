@@ -1,6 +1,10 @@
 # keel
 
+[![keel-ci](https://github.com/policyon/keel/actions/workflows/keel-ci.yml/badge.svg)](https://github.com/policyon/keel/actions/workflows/keel-ci.yml)
+
 ![The keel orchestration dashboard: a live session graph of the orchestrator, executors and reviewers, beside the plan ledger and the audit event feed](docs/keel-dashboard.png)
+
+▶ [Watch the 40-second demo tour (webm)](https://github.com/policyon/keel/releases/download/v0.6.0/Keel-demo-tour.webm) — the dashboard above, moving: a refused write, a wave of agents, a failed review earning a deeper retry, a blocked stop.
 
 keel is a governed agent harness: the structural spine under an AI coding
 session. It gates writes behind an approved plan and closes sessions with
@@ -19,8 +23,8 @@ telemetry, zero network calls in the kernel, zero model calls of its own.
 gates, the observers, the command-line tools, the capture-to-retrieval
 pipeline, the read-only reviewers and the orchestration skills are built, and
 a CI workflow runs every repository check and the full test suite on three
-operating systems — but CI is billing-blocked as of this writing, and its
-newest green three-OS evidence is dated 2026-09-02, not every push. keel is
+operating systems on every push — green on Linux, macOS and Windows (the
+badge above is live). keel is
 armed on its own repository at
 tier 2. The install path is the plugin marketplace (see
 [Install](#install)); installing enforces nothing until a project arms
